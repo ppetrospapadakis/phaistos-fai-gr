@@ -1,0 +1,618 @@
+/* =====================================================
+   Phaistos FAI - Custom Styles
+   Φανταστική εταιρεία τροφίμων! 🍓🍪🍲
+   ===================================================== */
+
+/* Google Fonts - Nunito (fun, friendly, Greek-compatible) */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka:wght@400;600;700&display=swap');
+
+/* ===== CSS Variables ===== */
+:root {
+    --orange:        #F97316;
+    --orange-light:  #FDBA74;
+    --orange-hover:  #EA6C0A;
+    --green:         #16A34A;
+    --green-light:   #86EFAC;
+    --green-hover:   #15803D;
+    --cream:         #FEF3C7;
+    --cream-dark:    #FDE68A;
+    --text-dark:     #1C1917;
+    --text-muted:    #78716C;
+    --white:         #FFFFFF;
+    --card-shadow:   0 12px 32px rgba(249, 115, 22, 0.12), 0 4px 12px rgba(0, 0, 0, 0.05);
+    --radius-lg:     24px;
+    --radius-md:     16px;
+    --radius-full:   999px;
+}
+
+/* ===== Reset & Base ===== */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    overflow-y: scroll;
+    scrollbar-gutter: stable;
+}
+
+body {
+    font-family: 'Nunito', sans-serif;
+    background: linear-gradient(135deg, #FEF3C7 0%, #ECFDF5 50%, #FFF7ED 100%);
+    background-attachment: fixed;
+    color: var(--text-dark);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Fredoka', cursive, sans-serif;
+}
+
+/* ===== Smooth Transitions ===== */
+a, button, input, select, textarea {
+    transition: all 0.2s ease;
+}
+
+/* ===== Navbar ===== */
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 3px solid var(--orange-light);
+    box-shadow: 0 4px 20px rgba(249, 115, 22, 0.1);
+    padding: 0 24px;
+    height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    font-family: 'Fredoka', cursive, sans-serif;
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: var(--orange);
+    white-space: nowrap;
+}
+
+.navbar-brand:hover {
+    transform: scale(1.03);
+}
+
+.navbar-brand .brand-dot {
+    color: var(--green);
+}
+
+.navbar-links {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    list-style: none;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding: 4px 0;
+}
+
+.navbar-links::-webkit-scrollbar { display: none; }
+
+.navbar-links a {
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 8px 16px;
+    border-radius: var(--radius-full);
+    white-space: nowrap;
+    color: var(--text-dark);
+    background: transparent;
+    border: 2px solid transparent;
+}
+
+.navbar-links a:hover {
+    background: var(--cream);
+    border-color: var(--orange-light);
+    color: var(--orange);
+    transform: translateY(-1px);
+}
+
+.navbar-links a.active {
+    background: var(--orange);
+    color: white;
+}
+
+.navbar-links a.nav-protected {
+    background: linear-gradient(135deg, #16A34A, #15803D);
+    color: white;
+    border-color: transparent;
+}
+
+.navbar-links a.nav-protected:hover {
+    background: linear-gradient(135deg, #15803D, #14532D);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(22, 163, 74, 0.35);
+}
+
+/* Mobile hamburger placeholder (optional for future) */
+@media (max-width: 640px) {
+    .navbar { padding: 0 14px; }
+    .navbar-brand { font-size: 1.35rem; }
+    .navbar-links a { padding: 6px 12px; font-size: 0.85rem; }
+}
+
+/* ===== Protected Page ===== */
+/* Hide protected content until auth check passes */
+.protected-page {
+    display: none;
+}
+
+/* ===== Page Layout Helpers ===== */
+.page-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 32px 20px;
+}
+
+/* ===== Buttons ===== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 1rem;
+    padding: 12px 28px;
+    border-radius: var(--radius-full);
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px) scale(1.02);
+}
+
+.btn:active {
+    transform: translateY(1px) scale(0.98);
+}
+
+.btn-orange {
+    background: linear-gradient(135deg, #F97316, #EA580C);
+    color: white;
+    box-shadow: 0 8px 20px rgba(249, 115, 22, 0.35);
+}
+
+.btn-orange:hover {
+    box-shadow: 0 12px 28px rgba(249, 115, 22, 0.45);
+}
+
+.btn-green {
+    background: linear-gradient(135deg, #16A34A, #15803D);
+    color: white;
+    box-shadow: 0 8px 20px rgba(22, 163, 74, 0.35);
+}
+
+.btn-green:hover {
+    box-shadow: 0 12px 28px rgba(22, 163, 74, 0.45);
+}
+
+.btn-outline {
+    background: white;
+    color: var(--orange);
+    border: 2px solid var(--orange);
+    box-shadow: 0 4px 12px rgba(249, 115, 22, 0.12);
+}
+
+/* ===== Cards ===== */
+.card {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    box-shadow: var(--card-shadow);
+    border: 2px solid rgba(249, 115, 22, 0.08);
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(249, 115, 22, 0.18);
+}
+
+/* ===== Footer ===== */
+.footer {
+    background: linear-gradient(135deg, #1C1917, #292524);
+    color: #D6D3D1;
+    text-align: center;
+    padding: 32px 24px;
+    margin-top: 60px;
+    font-size: 0.95rem;
+}
+
+.footer strong {
+    color: var(--orange-light);
+}
+
+.footer a {
+    color: var(--orange-light);
+    text-decoration: none;
+}
+
+/* ===== Hero Section ===== */
+.hero {
+    text-align: center;
+    padding: 60px 20px 40px;
+    position: relative;
+}
+
+.hero-badge {
+    display: inline-block;
+    background: var(--cream);
+    border: 2px solid var(--cream-dark);
+    color: var(--orange-hover);
+    font-weight: 800;
+    font-size: 0.9rem;
+    padding: 6px 18px;
+    border-radius: var(--radius-full);
+    margin-bottom: 18px;
+    letter-spacing: 0.5px;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    line-height: 1.15;
+    color: var(--text-dark);
+    margin-bottom: 16px;
+}
+
+.hero-title .highlight-orange {
+    color: var(--orange);
+}
+
+.hero-title .highlight-green {
+    color: var(--green);
+}
+
+.hero-subtitle {
+    font-size: 1.3rem;
+    color: var(--text-muted);
+    margin-bottom: 32px;
+    font-weight: 600;
+}
+
+@media (max-width: 640px) {
+    .hero-title { font-size: 2.2rem; }
+    .hero-subtitle { font-size: 1.05rem; }
+}
+
+/* ===== Product Cards ===== */
+.product-card {
+    background: white;
+    border-radius: 24px;
+    padding: 24px;
+    text-align: center;
+    box-shadow: 0 8px 24px rgba(249, 115, 22, 0.1);
+    border: 2px solid transparent;
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.product-card:hover {
+    transform: translateY(-6px) scale(1.02);
+    border-color: var(--orange-light);
+    box-shadow: 0 20px 40px rgba(249, 115, 22, 0.2);
+}
+
+.product-emoji {
+    font-size: 4rem;
+    display: block;
+    margin-bottom: 12px;
+    line-height: 1;
+}
+
+.product-name {
+    font-family: 'Fredoka', cursive, sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 6px;
+}
+
+.product-desc {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    line-height: 1.4;
+}
+
+.product-price {
+    display: inline-block;
+    background: var(--cream);
+    color: var(--orange-hover);
+    font-weight: 900;
+    font-size: 1.1rem;
+    padding: 4px 16px;
+    border-radius: var(--radius-full);
+    border: 2px solid var(--cream-dark);
+}
+
+/* ===== Employee Cards ===== */
+.employee-card {
+    background: white;
+    border-radius: 24px;
+    padding: 28px 20px;
+    text-align: center;
+    box-shadow: 0 8px 24px rgba(22, 163, 74, 0.1);
+    border: 2px solid rgba(22, 163, 74, 0.1);
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.employee-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 18px 36px rgba(22, 163, 74, 0.18);
+    border-color: var(--green-light);
+}
+
+.employee-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto 14px;
+    display: block;
+    border: 4px solid var(--green-light);
+    background: #F0FDF4;
+}
+
+.employee-name {
+    font-family: 'Fredoka', cursive, sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 4px;
+}
+
+.role-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #16A34A, #15803D);
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 4px 14px;
+    border-radius: var(--radius-full);
+    margin-top: 6px;
+}
+
+/* ===== Forum / Chat Styles ===== */
+.forum-topic-item {
+    background: white;
+    border-radius: var(--radius-md);
+    padding: 16px 20px;
+    margin-bottom: 10px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.forum-topic-item:hover {
+    border-color: var(--orange-light);
+    background: #FFF7ED;
+    transform: translateX(4px);
+}
+
+.chat-bubble {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 18px;
+    align-items: flex-start;
+}
+
+.chat-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 3px solid var(--green-light);
+    background: #F0FDF4;
+}
+
+.chat-content {
+    flex: 1;
+}
+
+.chat-meta {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+    font-weight: 700;
+}
+
+.chat-meta .chat-name {
+    color: var(--green);
+}
+
+.chat-text {
+    background: white;
+    border-radius: 0 var(--radius-md) var(--radius-md) var(--radius-md);
+    padding: 12px 16px;
+    font-size: 0.95rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    border: 2px solid rgba(22, 163, 74, 0.1);
+    line-height: 1.5;
+}
+
+/* ===== Form Inputs ===== */
+.form-input {
+    width: 100%;
+    padding: 12px 18px;
+    border: 2px solid #E7E5E4;
+    border-radius: var(--radius-md);
+    font-family: 'Nunito', sans-serif;
+    font-size: 1rem;
+    background: white;
+    color: var(--text-dark);
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-input:focus {
+    border-color: var(--orange);
+    box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.1);
+}
+
+/* ===== Loading / Error States ===== */
+.loading-spinner {
+    text-align: center;
+    font-size: 2rem;
+    padding: 40px;
+    animation: spin 1.5s linear infinite;
+    display: inline-block;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.error-message {
+    background: #FEF2F2;
+    border: 2px solid #FECACA;
+    color: #DC2626;
+    padding: 12px 18px;
+    border-radius: var(--radius-md);
+    font-weight: 700;
+    font-size: 0.95rem;
+}
+
+.success-message {
+    background: #F0FDF4;
+    border: 2px solid #BBF7D0;
+    color: #15803D;
+    padding: 12px 18px;
+    border-radius: var(--radius-md);
+    font-weight: 700;
+    font-size: 0.95rem;
+}
+
+/* ===== Table (for menu/price list) ===== */
+.price-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+}
+
+.price-table th {
+    background: linear-gradient(135deg, #F97316, #EA580C);
+    color: white;
+    padding: 14px 20px;
+    text-align: left;
+    font-family: 'Fredoka', cursive, sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+}
+
+.price-table td {
+    padding: 14px 20px;
+    border-bottom: 1px solid #FDE68A;
+    background: white;
+    font-size: 0.95rem;
+}
+
+.price-table tr:last-child td {
+    border-bottom: none;
+}
+
+.price-table tr:nth-child(even) td {
+    background: #FFFBEB;
+}
+
+.price-table tr:hover td {
+    background: var(--cream);
+}
+
+/* ===== Modal ===== */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(4px);
+    z-index: 9000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.modal-box {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: 36px;
+    width: 100%;
+    max-width: 480px;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.2);
+    animation: modalIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes modalIn {
+    from { transform: scale(0.85); opacity: 0; }
+    to   { transform: scale(1);    opacity: 1; }
+}
+
+/* ===== Section Title ===== */
+.section-title {
+    font-family: 'Fredoka', cursive, sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+}
+
+.section-subtitle {
+    color: var(--text-muted);
+    font-size: 1rem;
+    margin-bottom: 32px;
+}
+
+/* ===== Floating Decorations ===== */
+.bg-food-deco {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.food-float {
+    position: absolute;
+    font-size: 2rem;
+    opacity: 0.15;
+    animation: foodFloat 14s infinite ease-in-out;
+}
+
+.food-float:nth-child(1) { top: 8%;  left: 5%;  animation-delay: 0s;   font-size: 2.5rem; }
+.food-float:nth-child(2) { top: 20%; right: 8%; animation-delay: 2s;   font-size: 2rem;   }
+.food-float:nth-child(3) { top: 55%; left: 3%;  animation-delay: 4s;   font-size: 3rem;   }
+.food-float:nth-child(4) { top: 70%; right: 6%; animation-delay: 1.5s; font-size: 2.4rem; }
+.food-float:nth-child(5) { top: 88%; left: 42%; animation-delay: 6s;   font-size: 2.2rem; }
+
+@keyframes foodFloat {
+    0%, 100% { transform: translateY(0) rotate(0deg);   }
+    50%       { transform: translateY(-22px) rotate(12deg); }
+}

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Είσοδος Υπαλλήλων 🔒 | Phaistos FAI</title>
+    <meta name="robots" content="noindex,nofollow">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #FEF3C7 0%, #ECFDF5 50%, #FFF7ED 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .login-wrapper {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+        .login-card {
+            background: white;
+            border-radius: 32px;
+            padding: 48px 40px;
+            width: 100%;
+            max-width: 440px;
+            box-shadow: 0 20px 50px rgba(249, 115, 22, 0.15);
+            border: 3px solid #FDE68A;
+            text-align: center;
+        }
+        @media (max-width: 480px) {
+            .login-card { padding: 32px 24px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="index.html" class="navbar-brand">
+            🏪 Phaistos <span class="brand-dot">FAI</span>
+        </a>
+        <ul class="navbar-links">
+            <li><a href="index.html">🏠 Αρχική</a></li>
+            <li><a href="products.html">🛒 Προϊόντα</a></li>
+            <li><a href="menu.html">📋 Τιμοκατάλογος</a></li>
+            <li><a href="about.html">👥 Ποιοι Είμαστε</a></li>
+        </ul>
+    </nav>
+
+    <div class="login-wrapper">
+        <div class="login-card">
+            <!-- Lock Icon -->
+            <div style="font-size:4rem;margin-bottom:16px;">🔐</div>
+            <h1 class="section-title" style="margin-bottom:4px;">Είσοδος Υπαλλήλων</h1>
+            <p style="color:var(--text-muted);font-size:0.95rem;margin-bottom:28px;">
+                Αυτή η σελίδα είναι μόνο για τους υπαλλήλους της Phaistos FAI! 🏪
+            </p>
+
+            <!-- Login Form -->
+            <form id="loginForm" style="text-align:left;">
+                <div style="margin-bottom:16px;">
+                    <label for="emailInput"
+                           style="display:block;font-weight:700;font-size:0.9rem;color:var(--text-dark);margin-bottom:6px;">
+                        📧 Email
+                    </label>
+                    <input
+                        type="email"
+                        id="emailInput"
+                        class="form-input"
+                        placeholder="employee@phaistos-fai.gr"
+                        required
+                        autocomplete="email"
+                    >
+                </div>
+
+                <div style="margin-bottom:24px;">
+                    <label for="passwordInput"
+                           style="display:block;font-weight:700;font-size:0.9rem;color:var(--text-dark);margin-bottom:6px;">
+                        🔑 Κωδικός
+                    </label>
+                    <input
+                        type="password"
+                        id="passwordInput"
+                        class="form-input"
+                        placeholder="••••••••"
+                        required
+                        autocomplete="current-password"
+                    >
+                </div>
+
+                <!-- Error message -->
+                <div id="errorMsg" class="error-message" style="display:none;margin-bottom:16px;text-align:center;"></div>
+
+                <button type="submit" id="loginBtn" class="btn btn-orange" style="width:100%;font-size:1.1rem;">
+                    🚀 Σύνδεση
+                </button>
+            </form>
+
+            <p style="margin-top:24px;font-size:0.9rem;color:var(--text-muted);">
+                <a href="index.html" style="color:var(--orange);font-weight:700;text-decoration:none;">
+                    ← Πίσω στην Αρχική
+                </a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>
+            <strong>🏪 Phaistos FAI</strong> — phaistos-fai.gr<br>
+            <span style="font-size:0.85rem;">© 2024 Phaistos FAI • Φτιαγμένο με 💖 από Αριάδνη &amp; Πέτρο</span>
+        </p>
+    </footer>
+
+    <!-- IMPORTANT: Supabase MUST be loaded before supabase-config.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script>
+
+    <script>
+        // ============================================================
+        // Login Page — Auth Flow
+        // ============================================================
+
+        // If already logged in, redirect to employees page
+        (async () => {
+            try {
+                const { data: { session } } = await supabaseClient.auth.getSession();
+                if (session) {
+                    window.location.href = 'employees.html';
+                }
+            } catch (e) {
+                // Not logged in — stay on this page
+            }
+        })();
+
+        const loginForm    = document.getElementById('loginForm');
+        const emailInput   = document.getElementById('emailInput');
+        const passwordInput = document.getElementById('passwordInput');
+        const errorMsg     = document.getElementById('errorMsg');
+        const loginBtn     = document.getElementById('loginBtn');
+
+        function showError(msg) {
+            errorMsg.textContent = msg;
+            errorMsg.style.display = 'block';
+        }
+
+        function hideError() {
+            errorMsg.style.display = 'none';
+        }
+
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            hideError();
+
+            const email    = emailInput.value.trim();
+            const password = passwordInput.value;
+
+            if (!email || !password) {
+                showError('❗ Παρακαλώ συμπλήρωσε email και κωδικό.');
+                return;
+            }
+
+            // Loading state
+            loginBtn.textContent = '⏳ Σύνδεση...';
+            loginBtn.disabled = true;
+
+            try {
+                const { data, error } = await supabaseClient.auth.signInWithPassword({
+                    email,
+                    password
+                });
+
+                if (error) {
+                    // Friendly Greek error messages
+                    let msg = '❌ Κάτι πήγε στραβά. Δοκίμασε ξανά!';
+                    if (error.message.includes('Invalid login credentials')) {
+                        msg = '❌ Λάθος email ή κωδικός. Δοκίμασε ξανά!';
+                    } else if (error.message.includes('Email not confirmed')) {
+                        msg = '📧 Παρακαλώ επιβεβαίωσε πρώτα το email σου.';
+                    } else if (error.message.includes('Too many requests')) {
+                        msg = '⏳ Πολλές προσπάθειες! Δοκίμασε σε λίγο.';
+                    }
+                    showError(msg);
+                    loginBtn.innerHTML = '🚀 Σύνδεση';
+                    loginBtn.disabled = false;
+                    return;
+                }
+
+                if (data.session) {
+                    loginBtn.innerHTML = '✅ Επιτυχία! Μεταφορά...';
+                    window.location.href = 'employees.html';
+                }
+            } catch (err) {
+                showError('❌ Σφάλμα σύνδεσης. Έλεγξε τη σύνδεσή σου.');
+                loginBtn.innerHTML = '🚀 Σύνδεση';
+                loginBtn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>

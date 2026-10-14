@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ποιοι Είμαστε 👥 | Phaistos FAI</title>
+    <meta name="description" content="Γνώρισε την ομάδα της Phaistos FAI — τους ανθρώπους πίσω από τα νοστιμότερα προϊόντα!">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="min-h-screen" style="background:linear-gradient(135deg,#FEF3C7 0%,#ECFDF5 50%,#FFF7ED 100%);">
+
+    <!-- Floating Food Decorations -->
+    <div class="bg-food-deco" aria-hidden="true">
+        <span class="food-float">👥</span>
+        <span class="food-float">⭐</span>
+        <span class="food-float">💚</span>
+        <span class="food-float">🏆</span>
+        <span class="food-float">🎀</span>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar" style="position:sticky;top:0;z-index:1000;">
+        <a href="index.html" class="navbar-brand">
+            🏪 Phaistos <span class="brand-dot">FAI</span>
+        </a>
+        <ul class="navbar-links">
+            <li><a href="index.html">🏠 Αρχική</a></li>
+            <li><a href="products.html">🛒 Προϊόντα</a></li>
+            <li><a href="menu.html">📋 Τιμοκατάλογος</a></li>
+            <li><a href="about.html" class="active">👥 Ποιοι Είμαστε</a></li>
+            <li><a href="employees.html" class="nav-protected">🔒 Υπάλληλοι</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero -->
+    <section style="position:relative;z-index:1;text-align:center;padding:50px 20px 30px;">
+        <div class="hero-badge">👥 Η Ομάδα μας</div>
+        <h1 class="hero-title">
+            Η <span class="highlight-green">Ομάδα</span> μας
+        </h1>
+        <p class="hero-subtitle">
+            Γνώρισε τους ανθρώπους που φτιάχνουν τα πιο νόστιμα προϊόντα! 💪✨
+        </p>
+    </section>
+
+    <!-- Employees Grid -->
+    <main style="position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:0 20px 60px;">
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+            <!-- Employee Card 1 (Placeholder) -->
+            <div class="employee-card">
+                <div class="employee-avatar"
+                     style="background:linear-gradient(135deg,#FEF3C7,#FDE68A);display:flex;align-items:center;justify-content:center;font-size:2.5rem;text-decoration:none;">
+                    👩
+                </div>
+                <div class="employee-name">Αριάδνη</div>
+                <div style="color:var(--text-muted);font-size:0.9rem;margin:4px 0 8px;">Επώνυμο</div>
+                <span class="role-badge">🎀 Διευθύντρια Γεύσεων</span>
+                <p style="color:var(--text-muted);font-size:0.88rem;margin-top:12px;line-height:1.4;">
+                    Υπεύθυνη για το να δοκιμάζει ΟΛΑ τα προϊόντα πριν βγουν στην αγορά! Πολύ σοβαρή δουλειά! 😄
+                </p>
+            </div>
+
+            <!-- Employee Card 2 (Placeholder) -->
+            <div class="employee-card">
+                <div class="employee-avatar"
+                     style="background:linear-gradient(135deg,#ECFDF5,#D1FAE5);display:flex;align-items:center;justify-content:center;font-size:2.5rem;">
+                    👨
+                </div>
+                <div class="employee-name">Πέτρος</div>
+                <div style="color:var(--text-muted);font-size:0.9rem;margin:4px 0 8px;">Επώνυμο</div>
+                <span class="role-badge" style="background:linear-gradient(135deg,#F97316,#EA580C);">🚚 Διευθυντής Logistics</span>
+                <p style="color:var(--text-muted);font-size:0.88rem;margin-top:12px;line-height:1.4;">
+                    Μεταφέρει τα προϊόντα από την κουζίνα στο τραπέζι σας! Πάντα έγκαιρα! ⏰
+                </p>
+            </div>
+
+            <!-- Employee Card 3 (Placeholder) -->
+            <div class="employee-card">
+                <div class="employee-avatar"
+                     style="background:linear-gradient(135deg,#EEF2FF,#E0E7FF);display:flex;align-items:center;justify-content:center;font-size:2.5rem;">
+                    🧑
+                </div>
+                <div class="employee-name">Υπάλληλος</div>
+                <div style="color:var(--text-muted);font-size:0.9rem;margin:4px 0 8px;">Επώνυμο</div>
+                <span class="role-badge" style="background:linear-gradient(135deg,#7C3AED,#6D28D9);">⭐ Ρόλος</span>
+                <p style="color:var(--text-muted);font-size:0.88rem;margin-top:12px;line-height:1.4;">
+                    Περιγραφή του ρόλου και της δουλειάς του υπαλλήλου εδώ. Πολύ σημαντικός! 🌟
+                </p>
+            </div>
+
+        </div>
+
+        <!-- Info Card -->
+        <div class="card text-center mt-10"
+             style="background:linear-gradient(135deg,#FFF7ED,#FEF3C7);border-color:#FDE68A;max-width:650px;margin:40px auto 0;">
+            <div style="font-size:2.5rem;margin-bottom:12px;">🏪</div>
+            <h2 style="font-family:'Fredoka',cursive;font-size:1.6rem;color:var(--orange);margin-bottom:8px;">
+                Η ιστορία μας
+            </h2>
+            <p style="color:#78350F;font-size:1rem;line-height:1.6;">
+                Η <strong>Phaistos FAI</strong> ξεκίνησε ως ένα μικρό οικογενειακό project
+                με πολύ αγάπη για το φαγητό και τη δημιουργικότητα!
+                Κάθε προϊόν μας είναι φτιαγμένο με <strong>χαρά, αγάπη και φαντασία</strong>! 💕
+            </p>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>
+            <strong>🏪 Phaistos FAI</strong> — phaistos-fai.gr<br>
+            <span style="font-size:0.85rem;">© 2024 Phaistos FAI • Φτιαγμένο με 💖 από Αριάδνη &amp; Πέτρο</span>
+        </p>
+    </footer>
+
+    <!-- Supabase JS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script>
+
+</body>
+</html>

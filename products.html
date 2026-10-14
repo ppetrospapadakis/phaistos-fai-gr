@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Προϊόντα 🛒 | Phaistos FAI</title>
+    <meta name="description" content="Όλα τα υπέροχα προϊόντα της Phaistos FAI — φράουλες, μπισκότα, γιουβαρλάκια και πολλά ακόμα!">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="min-h-screen" style="background:linear-gradient(135deg,#FEF3C7 0%,#ECFDF5 50%,#FFF7ED 100%);">
+
+    <!-- Floating Food Decorations -->
+    <div class="bg-food-deco" aria-hidden="true">
+        <span class="food-float">🍓</span>
+        <span class="food-float">🍪</span>
+        <span class="food-float">🍰</span>
+        <span class="food-float">🥗</span>
+        <span class="food-float">🫐</span>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar" style="position:sticky;top:0;z-index:1000;">
+        <a href="index.html" class="navbar-brand">
+            🏪 Phaistos <span class="brand-dot">FAI</span>
+        </a>
+        <ul class="navbar-links">
+            <li><a href="index.html">🏠 Αρχική</a></li>
+            <li><a href="products.html" class="active">🛒 Προϊόντα</a></li>
+            <li><a href="menu.html">📋 Τιμοκατάλογος</a></li>
+            <li><a href="about.html">👥 Ποιοι Είμαστε</a></li>
+            <li><a href="employees.html" class="nav-protected">🔒 Υπάλληλοι</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero -->
+    <section style="position:relative;z-index:1;text-align:center;padding:50px 20px 30px;">
+        <div class="hero-badge">🛒 Η Συλλογή μας</div>
+        <h1 class="hero-title">
+            Τα <span class="highlight-orange">Προϊόντα</span> μας
+        </h1>
+        <p class="hero-subtitle">
+            Φρέσκα, νόστιμα και φτιαγμένα με αγάπη! ❤️
+        </p>
+    </section>
+
+    <!-- Products Grid -->
+    <main style="position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:0 20px 60px;">
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+
+            <!-- Product 1 -->
+            <div class="product-card">
+                <span class="product-emoji">🍓</span>
+                <div class="product-name">Φράουλες</div>
+                <p class="product-desc">Φρέσκες, γλυκές φράουλες από τον κήπο μας! Τρυφερές και ζουμερές! 💕</p>
+                <span class="product-price">1,50€ / 100γρ</span>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="product-card">
+                <span class="product-emoji">🍪</span>
+                <div class="product-name">Μπισκότα Σοκολάτας</div>
+                <p class="product-desc">Σπιτικά μπισκότα με κομματάκια σοκολάτας! Τραγανά &amp; νόστιμα!</p>
+                <span class="product-price">2,00€ / 200γρ</span>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="product-card">
+                <span class="product-emoji">🍲</span>
+                <div class="product-name">Γιουβαρλάκια</div>
+                <p class="product-desc">Παραδοσιακά γιουβαρλάκια αυγολέμονο, όπως τα έφτιαχνε η γιαγιά!</p>
+                <span class="product-price">5,00€ / μερίδα</span>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="product-card">
+                <span class="product-emoji">🍰</span>
+                <div class="product-name">Κέικ Βανίλιας</div>
+                <p class="product-desc">Αφράτο σπιτικό κέικ με άρωμα βανίλιας! Τέλειο για κάθε στιγμή!</p>
+                <span class="product-price">3,50€ / κομμάτι</span>
+            </div>
+
+            <!-- Product 5 -->
+            <div class="product-card">
+                <span class="product-emoji">🥗</span>
+                <div class="product-name">Σαλάτα Εποχής</div>
+                <p class="product-desc">Φρέσκα λαχανικά εποχής με σπιτική σάλτσα ελαιολάδου &amp; λεμονιού!</p>
+                <span class="product-price">3,00€ / μερίδα</span>
+            </div>
+
+            <!-- Product 6 -->
+            <div class="product-card">
+                <span class="product-emoji">🍫</span>
+                <div class="product-name">Σοκολάτα Χειροποίητη</div>
+                <p class="product-desc">Χειροποίητη μαύρη σοκολάτα με αμύγδαλα! Γεύση που δεν ξεχνάς!</p>
+                <span class="product-price">4,00€ / 100γρ</span>
+            </div>
+
+            <!-- Product 7 -->
+            <div class="product-card">
+                <span class="product-emoji">🥤</span>
+                <div class="product-name">Φυσικός Χυμός</div>
+                <p class="product-desc">Φρέσκος φυσικός χυμός πορτοκάλι — στυμμένος τη στιγμή! 🍊</p>
+                <span class="product-price">2,50€ / 500ml</span>
+            </div>
+
+            <!-- Product 8 -->
+            <div class="product-card">
+                <span class="product-emoji">🍞</span>
+                <div class="product-name">Σπιτικό Ψωμί</div>
+                <p class="product-desc">Ολικής αλέσεως σπιτικό ψωμί, φρεσκοψημένο κάθε πρωί! 🌅</p>
+                <span class="product-price">2,00€ / φραντζόλα</span>
+            </div>
+
+            <!-- Product 9 -->
+            <div class="product-card">
+                <span class="product-emoji">🥕</span>
+                <div class="product-name">Κέικ Καρότου</div>
+                <p class="product-desc">Αφράτο κέικ καρότου με κρέμα τυριού — το αγαπημένο της Αριάδνης!</p>
+                <span class="product-price">3,50€ / κομμάτι</span>
+            </div>
+
+        </div>
+
+        <!-- Order CTA -->
+        <div class="card text-center mt-12"
+             style="background:linear-gradient(135deg,#FFF7ED,#FEF3C7);border-color:#FDE68A;">
+            <div style="font-size:2.5rem;margin-bottom:12px;">📞</div>
+            <h2 style="font-family:'Fredoka',cursive;font-size:1.6rem;color:var(--orange);margin-bottom:8px;">
+                Θέλεις να παραγγείλεις;
+            </h2>
+            <p style="color:#78350F;font-size:1rem;margin-bottom:20px;">
+                Επικοινώνησε μαζί μας για τις τιμές και τη διαθεσιμότητα!
+                Κάνε κλικ για να δεις τον τιμοκατάλογο.
+            </p>
+            <a href="menu.html" class="btn btn-orange">📋 Δες Τιμοκατάλογο</a>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>
+            <strong>🏪 Phaistos FAI</strong> — phaistos-fai.gr<br>
+            <span style="font-size:0.85rem;">© 2024 Phaistos FAI • Φτιαγμένο με 💖 από Αριάδνη &amp; Πέτρο</span>
+        </p>
+    </footer>
+
+    <!-- Supabase JS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script>
+
+</body>
+</html>
