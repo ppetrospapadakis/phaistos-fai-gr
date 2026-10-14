@@ -1,17 +1,12 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="el">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Είσοδος Υπαλλήλων 🔒 | Φαιστός ΦΑΪ</title>
     <meta name="robots" content="noindex,nofollow">
-
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
-
     <style>
         body {
             background: linear-gradient(135deg, #FEF3C7 0%, #ECFDF5 50%, #FFF7ED 100%);
@@ -47,7 +42,7 @@
     <nav class="navbar">
         <a href="index.html" class="navbar-brand">
             <img src="logo.jpg" alt="Φαιστός ΦΑΪ Logo" style="height:44px;width:44px;object-fit:contain;border-radius:50%;background:#fff;padding:2px;">
-            ΦΑΙΣΤΟΣ <span class="brand-dot">ΦΑΙ.</span>
+            Φαιστός <span class="brand-dot">ΦΑΪ</span>
         </a>
         <ul class="navbar-links">
             <li><a href="index.html">🏠 Αρχική</a></li>
@@ -59,27 +54,27 @@
 
     <div class="login-wrapper">
         <div class="login-card">
-            <!-- Lock Icon -->
             <div style="font-size:4rem;margin-bottom:16px;">🔐</div>
             <h1 class="section-title" style="margin-bottom:4px;">Είσοδος Υπαλλήλων</h1>
             <p style="color:var(--text-muted);font-size:0.95rem;margin-bottom:28px;">
                 Αυτή η σελίδα είναι μόνο για τους υπαλλήλους της Φαιστός ΦΑΪ! 🏪
             </p>
 
-            <!-- Login Form -->
             <form id="loginForm" style="text-align:left;">
                 <div style="margin-bottom:16px;">
-                    <label for="emailInput"
+                    <label for="usernameInput"
                            style="display:block;font-weight:700;font-size:0.9rem;color:var(--text-dark);margin-bottom:6px;">
-                        📧 Email
+                        👤 Όνομα χρήστη
                     </label>
                     <input
-                        type="email"
-                        id="emailInput"
+                        type="text"
+                        id="usernameInput"
                         class="form-input"
-                        placeholder="employee@phaistos-fai.gr"
+                        placeholder="ονομα-επωνυμο"
                         required
-                        autocomplete="email"
+                        autocomplete="username"
+                        autocapitalize="none"
+                        spellcheck="false"
                     >
                 </div>
 
@@ -98,7 +93,6 @@
                     >
                 </div>
 
-                <!-- Error message -->
                 <div id="errorMsg" class="error-message" style="display:none;margin-bottom:16px;text-align:center;"></div>
 
                 <button type="submit" id="loginBtn" class="btn btn-orange" style="width:100%;font-size:1.1rem;">
@@ -118,93 +112,63 @@
     <footer class="footer">
         <p>
             <strong>🏪 Φαιστός ΦΑΪ</strong> — phaistos-fai.gr<br>
-            <span style="font-size:0.85rem;">© 2024 Φαιστός ΦΑΪ • Φτιαγμένο με 💖 από Αριάδνη &amp; την ομάδα της</span>
+            <span style="font-size:0.85rem;">© 2025 Φαιστός ΦΑΪ • Φτιαγμένο με 💖 από Αριάδνη &amp; την ομάδα της</span>
         </p>
     </footer>
 
-    <!-- IMPORTANT: Supabase MUST be loaded before supabase-config.js -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="supabase-config.js"></script>
-
     <script>
         // ============================================================
-        // Login Page — Auth Flow
+        // Hardcoded employee credentials
         // ============================================================
+        const SHARED_PASSWORD = 'FaiFai2025';
 
-        // If already logged in, redirect to employees page
-        (async () => {
-            try {
-                const { data: { session } } = await supabaseClient.auth.getSession();
-                if (session) {
-                    window.location.href = 'employees.html';
-                }
-            } catch (e) {
-                // Not logged in — stay on this page
-            }
-        })();
+        const EMPLOYEES = {
+            'ariadni-papadaki':    { name: 'Αριάδνη',  surname: 'Παπαδάκη',    role: 'Αφεντικό',       photo: 'employees/ariadni.jpg' },
+            'petros-papadakis':    { name: 'Πέτρος',   surname: 'Παπαδάκης',   role: 'Μικρό Αφεντικό', photo: 'employees/petros.jpg'   },
+            'eirini-papadaki':     { name: 'Ειρήνη',   surname: 'Παπαδάκη',    role: 'Υπάλληλος',      photo: 'employees/eirini.jpg'   },
+            'natalia-antonakaki':  { name: 'Ναταλία',  surname: 'Αντωνακάκη',  role: 'Υπάλληλος',      photo: 'employees/natalia.jpg'  },
+            'maria-tsatsaroni':    { name: 'Μαρία',    surname: 'Τσατσαρώνη',  role: 'Μικρός Βοηθός',  photo: 'employees/maria.jpg'    },
+            'maria-doukaki':       { name: 'Μαρία',    surname: 'Δουκάκη',     role: 'Υπάλληλος',      photo: 'employees/maria_d.jpg'  },
+        };
 
-        const loginForm    = document.getElementById('loginForm');
-        const emailInput   = document.getElementById('emailInput');
+        // If already logged in, redirect
+        if (sessionStorage.getItem('fai_employee')) {
+            window.location.href = 'employees.html';
+        }
+
+        const loginForm     = document.getElementById('loginForm');
+        const usernameInput = document.getElementById('usernameInput');
         const passwordInput = document.getElementById('passwordInput');
-        const errorMsg     = document.getElementById('errorMsg');
-        const loginBtn     = document.getElementById('loginBtn');
+        const errorMsg      = document.getElementById('errorMsg');
+        const loginBtn      = document.getElementById('loginBtn');
 
         function showError(msg) {
             errorMsg.textContent = msg;
             errorMsg.style.display = 'block';
         }
 
-        function hideError() {
-            errorMsg.style.display = 'none';
-        }
-
-        loginForm.addEventListener('submit', async (e) => {
+        loginForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            hideError();
+            errorMsg.style.display = 'none';
 
-            const email    = emailInput.value.trim();
+            const username = usernameInput.value.trim().toLowerCase();
             const password = passwordInput.value;
 
-            if (!email || !password) {
-                showError('❗ Παρακαλώ συμπλήρωσε email και κωδικό.');
+            if (!EMPLOYEES[username]) {
+                showError('❌ Δεν βρέθηκε αυτός ο χρήστης. Έλεγξε το όνομά σου!');
                 return;
             }
 
-            // Loading state
-            loginBtn.textContent = '⏳ Σύνδεση...';
-            loginBtn.disabled = true;
-
-            try {
-                const { data, error } = await supabaseClient.auth.signInWithPassword({
-                    email,
-                    password
-                });
-
-                if (error) {
-                    // Friendly Greek error messages
-                    let msg = '❌ Κάτι πήγε στραβά. Δοκίμασε ξανά!';
-                    if (error.message.includes('Invalid login credentials')) {
-                        msg = '❌ Λάθος email ή κωδικός. Δοκίμασε ξανά!';
-                    } else if (error.message.includes('Email not confirmed')) {
-                        msg = '📧 Παρακαλώ επιβεβαίωσε πρώτα το email σου.';
-                    } else if (error.message.includes('Too many requests')) {
-                        msg = '⏳ Πολλές προσπάθειες! Δοκίμασε σε λίγο.';
-                    }
-                    showError(msg);
-                    loginBtn.innerHTML = '🚀 Σύνδεση';
-                    loginBtn.disabled = false;
-                    return;
-                }
-
-                if (data.session) {
-                    loginBtn.innerHTML = '✅ Επιτυχία! Μεταφορά...';
-                    window.location.href = 'employees.html';
-                }
-            } catch (err) {
-                showError('❌ Σφάλμα σύνδεσης. Έλεγξε τη σύνδεσή σου.');
-                loginBtn.innerHTML = '🚀 Σύνδεση';
-                loginBtn.disabled = false;
+            if (password !== SHARED_PASSWORD) {
+                showError('❌ Λάθος κωδικός. Δοκίμασε ξανά!');
+                return;
             }
+
+            // Success — save to sessionStorage and redirect
+            loginBtn.textContent = '✅ Επιτυχία! Μεταφορά...';
+            loginBtn.disabled = true;
+            sessionStorage.setItem('fai_employee', JSON.stringify({ key: username, ...EMPLOYEES[username] }));
+            setTimeout(() => { window.location.href = 'employees.html'; }, 600);
         });
     </script>
 </body>

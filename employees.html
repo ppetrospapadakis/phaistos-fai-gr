@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="el">
 <head>
     <meta charset="UTF-8">
@@ -204,14 +204,271 @@
         </p>
     </footer>
 
-    <!-- IMPORTANT: Supabase MUST be loaded before supabase-config.js -->
+    <!-- Supabase for forum storage only (no auth) -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="supabase-config.js"></script>
 
     <script>
     // ================================================================
-    // Employees Page — Protected Forum
+    // Employees Page — sessionStorage auth + Supabase forum
     // ================================================================
+
+    const authLoading     = document.getElementById('authLoading');
+    const mainContent     = document.getElementById('mainContent');
+    const userBar         = document.getElementById('userBar');
+    const userNameDisplay = document.getElementById('userNameDisplay');
+    const userRoleDisplay = document.getElementById('userRoleDisplay');
+    const userAvatarEl    = document.getElementById('userAvatar');
+    const logoutBtn       = document.getElementById('logoutBtn');
+
+    const topicsView       = document.getElementById('topicsView');
+    const chatView         = document.getElementById('chatView');
+    const topicsList       = document.getElementById('topicsList');
+    const topicsStatus     = document.getElementById('topicsStatus');
+    const newTopicBtn      = document.getElementById('newTopicBtn');
+    const newTopicForm     = document.getElementById('newTopicForm');
+    const topicTitleInput  = document.getElementById('topicTitleInput');
+    const submitTopicBtn   = document.getElementById('submitTopicBtn');
+    const cancelTopicBtn   = document.getElementById('cancelTopicBtn');
+    const refreshTopicsBtn = document.getElementById('refreshTopicsBtn');
+    const chatTopicTitle   = document.getElementById('chatTopicTitle');
+    const messagesContainer = document.getElementById('messagesContainer');
+    const messageInput     = document.getElementById('messageInput');
+    const sendMessageBtn   = document.getElementById('sendMessageBtn');
+    const backToTopicsBtn  = document.getElementById('backToTopicsBtn');
+    const refreshMsgsBtn   = document.getElementById('refreshMessagesBtn');
+
+    let currentEmployee = null;
+    let currentTopicId  = null;
+
+    // ── Auth Check (sessionStorage) ───────────────────────────────────
+    function init() {
+        const stored = sessionStorage.getItem('fai_employee');
+        if (!stored) {
+            window.location.href = 'login.html';
+            return;
+        }
+
+        currentEmployee = JSON.parse(stored);
+
+        userNameDisplay.textContent = `${currentEmployee.name} ${currentEmployee.surname} 👋`;
+        userRoleDisplay.textContent = currentEmployee.role;
+        if (currentEmployee.photo) {
+            userAvatarEl.src = currentEmployee.photo;
+        }
+
+        authLoading.style.display = 'none';
+        userBar.style.display     = 'flex';
+        mainContent.style.display = 'block';
+
+        loadTopics();
+    }
+
+    // ── Logout ────────────────────────────────────────────────────────
+    logoutBtn.addEventListener('click', () => {
+        sessionStorage.removeItem('fai_employee');
+        window.location.href = 'login.html';
+    });
+
+    // ── Topics ────────────────────────────────────────────────────────
+    async function loadTopics() {
+        topicsStatus.textContent = '⏳ Φόρτωση θεμάτων...';
+        topicsStatus.style.display = 'block';
+        topicsList.innerHTML = '';
+
+        const { data: topics, error } = await supabaseClient
+            .from('fai_topics')
+            .select('*')
+            .order('created_at', { ascending: false });
+
+        topicsStatus.style.display = 'none';
+
+        if (error) {
+            topicsStatus.textContent = '❌ Σφάλμα φόρτωσης θεμάτων.';
+            topicsStatus.style.display = 'block';
+            return;
+        }
+
+        if (!topics || topics.length === 0) {
+            topicsStatus.textContent = '💬 Δεν υπάρχουν θέματα ακόμα. Δημιούργησε το πρώτο!';
+            topicsStatus.style.display = 'block';
+            return;
+        }
+
+        topics.forEach(topic => {
+            const div = document.createElement('div');
+            div.className = 'forum-topic-item';
+            div.innerHTML = `
+                <div style="display:flex;align-items:center;gap:10px;flex:1;min-width:0;">
+                    <span style="font-size:1.5rem;flex-shrink:0;">💬</span>
+                    <div style="min-width:0;">
+                        <span style="font-weight:700;font-size:1rem;color:var(--text-dark);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:block;">
+                            ${escapeHtml(topic.title)}
+                        </span>
+                        <span style="font-size:0.8rem;color:var(--text-muted);">από ${escapeHtml(topic.created_by_name || '')}</span>
+                    </div>
+                </div>
+                <span class="topic-date">${formatDate(topic.created_at)}</span>
+            `;
+            div.addEventListener('click', () => openTopic(topic));
+            topicsList.appendChild(div);
+        });
+    }
+
+    refreshTopicsBtn.addEventListener('click', loadTopics);
+
+    // ── New Topic ─────────────────────────────────────────────────────
+    newTopicBtn.addEventListener('click', () => {
+        newTopicForm.style.display = newTopicForm.style.display === 'none' ? 'block' : 'none';
+        topicTitleInput.focus();
+    });
+
+    cancelTopicBtn.addEventListener('click', () => {
+        newTopicForm.style.display = 'none';
+        topicTitleInput.value = '';
+    });
+
+    submitTopicBtn.addEventListener('click', async () => {
+        const title = topicTitleInput.value.trim();
+        if (!title) { alert('❗ Γράψε τίτλο για το θέμα!'); return; }
+
+        submitTopicBtn.textContent = '⏳ Δημιουργία...';
+        submitTopicBtn.disabled = true;
+
+        const { error } = await supabaseClient
+            .from('fai_topics')
+            .insert({
+                title,
+                created_by_key:  currentEmployee.key,
+                created_by_name: `${currentEmployee.name} ${currentEmployee.surname}`
+            });
+
+        submitTopicBtn.textContent = '✅ Δημιουργία';
+        submitTopicBtn.disabled = false;
+
+        if (error) { alert('❌ Σφάλμα: ' + error.message); return; }
+
+        topicTitleInput.value = '';
+        newTopicForm.style.display = 'none';
+        await loadTopics();
+    });
+
+    // ── Chat View ─────────────────────────────────────────────────────
+    async function openTopic(topic) {
+        currentTopicId = topic.id;
+        chatTopicTitle.textContent = '💬 ' + topic.title;
+        topicsView.style.display = 'none';
+        chatView.style.display   = 'block';
+        await loadMessages();
+    }
+
+    backToTopicsBtn.addEventListener('click', () => {
+        chatView.style.display   = 'none';
+        topicsView.style.display = 'block';
+        currentTopicId = null;
+        loadTopics();
+    });
+
+    refreshMsgsBtn.addEventListener('click', loadMessages);
+
+    async function loadMessages() {
+        messagesContainer.innerHTML = '<p style="text-align:center;color:var(--text-muted);padding:20px;font-weight:700;">⏳ Φόρτωση μηνυμάτων...</p>';
+
+        const { data: messages, error } = await supabaseClient
+            .from('fai_messages')
+            .select('*')
+            .eq('topic_id', currentTopicId)
+            .order('created_at', { ascending: true });
+
+        if (error) {
+            messagesContainer.innerHTML = '<p style="text-align:center;color:#DC2626;padding:20px;font-weight:700;">❌ Σφάλμα φόρτωσης μηνυμάτων.</p>';
+            return;
+        }
+
+        if (!messages || messages.length === 0) {
+            messagesContainer.innerHTML = '<p style="text-align:center;color:var(--text-muted);padding:20px;font-weight:700;">🌟 Να είσαι ο πρώτος που θα γράψει!</p>';
+            return;
+        }
+
+        messagesContainer.innerHTML = '';
+        messages.forEach(msg => {
+            const bubble = document.createElement('div');
+            bubble.className = 'chat-bubble';
+            bubble.innerHTML = `
+                <img class="chat-avatar"
+                     src="${escapeHtml(msg.employee_photo || '')}"
+                     alt="${escapeHtml(msg.employee_name || '')}"
+                     onerror="this.style.background='#D1FAE5';this.textContent='👤';this.style.display='flex';">
+                <div class="chat-content">
+                    <div class="chat-meta">
+                        <span class="chat-name">${escapeHtml(msg.employee_name || 'Άγνωστος')}</span>
+                        ${msg.employee_role ? ` · <span style="color:var(--orange);">${escapeHtml(msg.employee_role)}</span>` : ''}
+                        · <span>${formatDateFull(msg.created_at)}</span>
+                    </div>
+                    <div class="chat-text">${escapeHtml(msg.content).replace(/\n/g, '<br>')}</div>
+                </div>
+            `;
+            messagesContainer.appendChild(bubble);
+        });
+
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    // ── Send Message ──────────────────────────────────────────────────
+    sendMessageBtn.addEventListener('click', sendMessage);
+    messageInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && e.ctrlKey) sendMessage();
+    });
+
+    async function sendMessage() {
+        const content = messageInput.value.trim();
+        if (!content || !currentTopicId) return;
+
+        sendMessageBtn.textContent = '⏳...';
+        sendMessageBtn.disabled = true;
+
+        const { error } = await supabaseClient
+            .from('fai_messages')
+            .insert({
+                topic_id:       currentTopicId,
+                employee_key:   currentEmployee.key,
+                employee_name:  `${currentEmployee.name} ${currentEmployee.surname}`,
+                employee_role:  currentEmployee.role,
+                employee_photo: currentEmployee.photo,
+                content
+            });
+
+        sendMessageBtn.textContent = '📨 Αποστολή';
+        sendMessageBtn.disabled = false;
+
+        if (error) { alert('❌ Σφάλμα αποστολής: ' + error.message); return; }
+
+        messageInput.value = '';
+        await loadMessages();
+    }
+
+    // ── Helpers ───────────────────────────────────────────────────────
+    function formatDate(iso) {
+        if (!iso) return '';
+        return new Date(iso).toLocaleDateString('el-GR', { day:'2-digit', month:'2-digit', year:'numeric' });
+    }
+
+    function formatDateFull(iso) {
+        if (!iso) return '';
+        return new Date(iso).toLocaleString('el-GR', { day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit' });
+    }
+
+    function escapeHtml(str) {
+        if (!str) return '';
+        return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+    }
+
+    // ── Start ─────────────────────────────────────────────────────────
+    init();
+    </script>
+</body>
+</html>
+
 
     const authLoading   = document.getElementById('authLoading');
     const mainContent   = document.getElementById('mainContent');
