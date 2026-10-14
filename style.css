@@ -66,10 +66,10 @@ a, button, input, select, textarea {
     border-bottom: 3px solid var(--orange-light);
     box-shadow: 0 4px 20px rgba(249, 115, 22, 0.1);
     padding: 0 24px;
-    height: 68px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    height: 68px;
 }
 
 .navbar-brand {
@@ -142,12 +142,29 @@ a, button, input, select, textarea {
     box-shadow: 0 6px 16px rgba(22, 163, 74, 0.35);
 }
 
-/* Mobile hamburger placeholder (optional for future) */
+/* Mobile: logo top row, links bottom row */
 @media (max-width: 640px) {
-    .navbar { padding: 0 14px; }
-    .navbar-brand { font-size: 1.35rem; }
-    .navbar-links a { padding: 6px 12px; font-size: 0.85rem; }
+    .navbar {
+        flex-direction: column;
+        height: auto;
+        padding: 10px 14px 0;
+        align-items: stretch;
+    }
+    .navbar-brand {
+        font-size: 1.35rem;
+        padding-bottom: 8px;
+    }
+    .navbar-links {
+        padding: 6px 0 8px;
+        gap: 6px;
+        border-top: 2px solid var(--cream-dark);
+    }
+    .navbar-links a {
+        padding: 6px 12px;
+        font-size: 0.82rem;
+    }
 }
+
 
 /* ===== Protected Page ===== */
 /* Hide protected content until auth check passes */
