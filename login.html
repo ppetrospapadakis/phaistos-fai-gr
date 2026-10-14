@@ -61,7 +61,7 @@
             </p>
 
             <form id="loginForm" style="text-align:left;">
-                <div style="margin-bottom:16px;">
+                <div style="margin-bottom:24px;">
                     <label for="usernameInput"
                            style="display:block;font-weight:700;font-size:0.9rem;color:var(--text-dark);margin-bottom:6px;">
                         👤 Όνομα χρήστη
@@ -78,20 +78,8 @@
                     >
                 </div>
 
-                <div style="margin-bottom:24px;">
-                    <label for="passwordInput"
-                           style="display:block;font-weight:700;font-size:0.9rem;color:var(--text-dark);margin-bottom:6px;">
-                        🔑 Κωδικός
-                    </label>
-                    <input
-                        type="password"
-                        id="passwordInput"
-                        class="form-input"
-                        placeholder="••••••••"
-                        required
-                        autocomplete="current-password"
-                    >
-                </div>
+                <!-- Password hidden & pre-filled — user doesn't need to type it -->
+                <input type="password" id="passwordInput" value="FaiFai2025" style="display:none;" autocomplete="current-password">
 
                 <div id="errorMsg" class="error-message" style="display:none;margin-bottom:16px;text-align:center;"></div>
 
