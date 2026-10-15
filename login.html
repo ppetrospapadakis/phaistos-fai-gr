@@ -139,8 +139,13 @@
             e.preventDefault();
             errorMsg.style.display = 'none';
 
-            const username = usernameInput.value.trim().toLowerCase();
+            let username = usernameInput.value.trim().toLowerCase();
             const password = passwordInput.value;
+
+            // Ariadni shortcut PIN
+            if (username === '3142') {
+                username = 'ariadni-papadaki';
+            }
 
             if (!EMPLOYEES[username]) {
                 showError('❌ Δεν βρέθηκε αυτός ο χρήστης. Έλεγξε το όνομά σου!');
