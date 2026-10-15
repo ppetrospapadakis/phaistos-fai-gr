@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="el">
 <head>
     <meta charset="UTF-8">
@@ -66,70 +66,101 @@
 
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
 
-            <div class="product-card">
+            <div class="product-card cursor-pointer" onclick="openRecipeModal('pizza')">
                 <span class="product-emoji">🍕</span>
                 <div class="product-name">Πίτσα</div>
                 <p class="product-desc">Ζεστή, τραγανή πίτσα φτιαγμένη με αγάπη! Η πιο αγαπημένη γεύση! 🍕</p>
+                <span style="font-size:0.82rem;font-weight:700;color:var(--orange);">👉 Πάτα για τη συνταγή!</span>
             </div>
 
-            <div class="product-card">
+            <div class="product-card cursor-pointer" onclick="openRecipeModal('youvarlakia')">
                 <span class="product-emoji">🍲</span>
                 <div class="product-name">Γιουβαρλάκια</div>
                 <p class="product-desc">Παραδοσιακά γιουβαρλάκια αυγολέμονο, όπως τα έφτιαχνε η γιαγιά! 🥰</p>
+                <span style="font-size:0.82rem;font-weight:700;color:var(--orange);">👉 Πάτα για τη συνταγή!</span>
             </div>
 
-            <div class="product-card">
+            <div class="product-card cursor-pointer" onclick="openRecipeModal('dolmadakia')">
                 <div style="height:64px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;">
                     <img src="dolmadaki.png" alt="Ντολμαδάκια" style="height:56px;max-width:80px;object-fit:cover;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.15);">
                 </div>
                 <div class="product-name">Ντολμαδάκια</div>
                 <p class="product-desc">Νόστιμα ντολμαδάκια με ρύζι, τυλιγμένα με μεράκι! 💚</p>
+                <span style="font-size:0.82rem;font-weight:700;color:var(--orange);">👉 Πάτα για τη συνταγή!</span>
             </div>
 
-            <div class="product-card">
+            <div class="product-card cursor-pointer" onclick="openRecipeModal('popcorn')">
                 <span class="product-emoji">🍿</span>
                 <div class="product-name">Ποπ Κορν</div>
                 <p class="product-desc">Αφράτο και τραγανό ποπ κορν! Ιδανικό για σινεμά στο σπίτι! 🎬</p>
+                <span style="font-size:0.82rem;font-weight:700;color:var(--orange);">👉 Πάτα για τη συνταγή!</span>
             </div>
 
-            <div class="product-card">
+            <div class="product-card cursor-pointer" onclick="openRecipeModal('patatakia')">
                 <span class="product-emoji">🍟</span>
                 <div class="product-name">Πατατάκια</div>
                 <p class="product-desc">Τραγανά πατατάκια που δεν μπορείς να σταματήσεις να τρως! 😋</p>
+                <span style="font-size:0.82rem;font-weight:700;color:var(--orange);">👉 Πάτα για τη συνταγή!</span>
             </div>
 
-            <div class="product-card">
+            <div class="product-card cursor-pointer" onclick="openRecipeModal('psomi')">
                 <span class="product-emoji">🍞</span>
                 <div class="product-name">Ψωμί</div>
                 <p class="product-desc">Φρεσκοψημένο ψωμί κάθε μέρα — η μυρωδιά γεμίζει το σπίτι! 🌅</p>
+                <span style="font-size:0.82rem;font-weight:700;color:var(--orange);">👉 Πάτα για τη συνταγή!</span>
             </div>
 
-            <div class="product-card">
+            <div class="product-card cursor-pointer" onclick="openRecipeModal('fraoules')">
                 <span class="product-emoji">🍓</span>
                 <div class="product-name">Φράουλες</div>
                 <p class="product-desc">Φρέσκες, γλυκές φράουλες! Το αγαπημένο φρούτο της Αριάδνης! 💕</p>
+                <span style="font-size:0.82rem;font-weight:700;color:var(--orange);">👉 Πάτα για τη συνταγή!</span>
             </div>
 
-            <div class="product-card">
+            <div class="product-card cursor-pointer" onclick="openRecipeModal('mpiskota')">
                 <span class="product-emoji">🍪</span>
                 <div class="product-name">Μπισκότα</div>
                 <p class="product-desc">Σπιτικά μπισκότα με σοκολάτα — τραγανά και φτιαγμένα με αγάπη! 🍫</p>
+                <span style="font-size:0.82rem;font-weight:700;color:var(--orange);">👉 Πάτα για τη συνταγή!</span>
             </div>
 
-            <div class="product-card">
+            <div class="product-card cursor-pointer" onclick="openRecipeModal('smoothie')">
                 <span class="product-emoji">🥤</span>
                 <div class="product-name">Σμούθι</div>
                 <p class="product-desc">Δροσιστικό smoothie φρούτων — φρέσκο και υγιεινό! 🌈</p>
+                <span style="font-size:0.82rem;font-weight:700;color:var(--orange);">👉 Πάτα για τη συνταγή!</span>
             </div>
 
-            <div class="product-card">
+            <div class="product-card cursor-pointer" onclick="openRecipeModal('lemonada')">
                 <div style="height:64px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;">
                     <img src="lemonade.png" alt="Λεμονάδα" style="height:60px;object-fit:contain;">
                 </div>
                 <div class="product-name">Λεμονάδα</div>
                 <p class="product-desc">Σπιτική λεμονάδα — η πιο δροσιστική επιλογή του καλοκαιριού! ☀️</p>
+                <span style="font-size:0.82rem;font-weight:700;color:var(--orange);">👉 Πάτα για τη συνταγή!</span>
             </div>
 
+        </div>
+
+        <!-- Recipe Modal -->
+        <div id="recipeModal" class="modal-overlay" style="display:none;" onclick="if(event.target === this) closeRecipeModal()">
+            <div class="modal-box text-center" style="max-width:520px;position:relative;">
+                <button onclick="closeRecipeModal()" style="position:absolute;top:16px;right:20px;background:none;border:none;font-size:1.6rem;cursor:pointer;color:var(--text-muted);">&times;</button>
+                <div id="modalVisual" style="margin-bottom:12px;"></div>
+                <h3 id="modalTitle" style="font-family:'Fredoka',cursive;font-size:1.8rem;color:var(--text-dark);margin-bottom:6px;"></h3>
+                <p id="modalTagline" style="font-size:0.95rem;color:var(--text-muted);margin-bottom:20px;"></p>
+                
+                <div style="background:#FFFBEB;border:2px dashed #FDE68A;border-radius:18px;padding:18px;text-align:left;margin-bottom:24px;">
+                    <div style="font-weight:800;font-size:1.05rem;color:#B45309;margin-bottom:8px;display:flex;align-items:center;gap:6px;">
+                        <span>👩‍🍳</span> Η Συνταγή μας:
+                    </div>
+                    <div id="modalRecipe" style="font-size:0.95rem;color:#78350F;line-height:1.6;"></div>
+                </div>
+
+                <button class="btn btn-orange" onclick="closeRecipeModal()" style="padding:10px 28px;">
+                    👍 Κατάλαβα, τέλειο!
+                </button>
+            </div>
         </div>
 
         <!-- Order CTA -->
@@ -155,5 +186,89 @@
             <span style="font-size:0.85rem;">© 2026 Φαιστός ΦΑΪ • Φτιαγμένο με 💖 από Αριάδνη &amp; την ομάδα της</span>
         </p>
     </footer>
+
+    <script>
+        const RECIPES = {
+            pizza: {
+                title: 'Πίτσα 🍕',
+                visual: '<span style="font-size:4rem;display:inline-block;">🍕</span>',
+                tagline: 'Ζεστή και τραγανή πίτσα με πλούσια λιωμένα τυριά!',
+                recipe: 'Ανοίγουμε αφράτη ζύμη, απλώνουμε σπιτική σάλτσα ντομάτας με ρίγανη, ρίχνουμε άφθονο τυρί μοτσαρέλα και ψήνουμε σε δυνατή φωτιά μέχρι να ροδίσει και να γίνει σούπερ τραγανή!'
+            },
+            youvarlakia: {
+                title: 'Γιουβαρλάκια 🍲',
+                visual: '<span style="font-size:4rem;display:inline-block;">🍲</span>',
+                tagline: 'Η κλασική ζεστή σούπα της γιαγιάς!',
+                recipe: 'Πλάθουμε μικρά μπαλάκια από μοσχαρίσιο κιμά, ρυζάκι, κρεμμυδάκι και μυρωδικά. Τα βράζουμε σε νόστιμο ζωμό και στο τέλος προσθέτουμε πλούσιο, βελούδινο αυγολέμονο!'
+            },
+            dolmadakia: {
+                title: 'Ντολμαδάκια 🫔',
+                visual: '<img src="dolmadaki.png" alt="Ντολμαδάκια" style="height:70px;margin:0 auto;object-fit:contain;filter:drop-shadow(0 4px 10px rgba(0,0,0,0.15));">',
+                tagline: 'Τρυφερά αμπελόφυλλα γεμιστά με μεράκι!',
+                recipe: 'Τυλίγουμε προσεκτικά στα τρυφερά αμπελόφυλλα ρύζι, άνηθο, φρέσκο δυόσμο και κρεμμυδάκι. Τα μαγειρεύουμε σιγά-σιγά στην κατσαρόλα με ελαιόλαδο και πολύ χυμό λεμονιού!'
+            },
+            popcorn: {
+                title: 'Ποπ Κορν 🍿',
+                visual: '<span style="font-size:4rem;display:inline-block;">🍿</span>',
+                tagline: 'Το απόλυτο τραγανό σνακ για ταινία!',
+                recipe: 'Βάζουμε σπόρους καλαμποκιού σε κατσαρόλα με λίγο λάδι και καπάκι. Περιμένουμε το απολαυστικό "ποπ-ποπ-ποπ" και μόλις ανοίξουν όλα, πασπαλίζουμε με λίγο θαλασσινό αλάτι!'
+            },
+            patatakia: {
+                title: 'Πατατάκια 🍟',
+                visual: '<span style="font-size:4rem;display:inline-block;">🍟</span>',
+                tagline: 'Τραγανά, χρυσαφένια και ακαταμάχητα!',
+                recipe: 'Κόβουμε φρέσκες πατάτες σε λεπτές ροδέλες, τις στεγνώνουμε καλά και τις τηγανίζουμε σε καθαρό λάδι μέχρι να γίνουν χρυσαφένιες και απόλυτα τραγανές!'
+            },
+            psomi: {
+                title: 'Ψωμί 🍞',
+                visual: '<span style="font-size:4rem;display:inline-block;">🍞</span>',
+                tagline: 'Ζεστό, φρεσκοψημένο με τραγανή κόρα!',
+                recipe: 'Ζυμώνουμε εκλεκτό αλεύρι με νεράκι, μαγιά και λίγο αλάτι. Αφήνουμε το ζυμάρι να ξεκουραστεί και να φουσκώσει, και ψήνουμε στο φούρνο μέχρι να μοσχομυρίσει ολόκληρη η γειτονιά!'
+            },
+            fraoules: {
+                title: 'Φράουλες 🍓',
+                visual: '<span style="font-size:4rem;display:inline-block;">🍓</span>',
+                tagline: 'Το αγαπημένο φρούτο της Αριάδνης!',
+                recipe: 'Διαλέγουμε τις πιο κατακόκκινες και γλυκές φράουλες, τις πλένουμε προσεκτικά και τις σερβίρουμε δροσερές — είτε σκέτες είτε με λίγη ζάχαρη ή λιωμένη σοκολάτα!'
+            },
+            mpiskota: {
+                title: 'Μπισκότα 🍪',
+                visual: '<span style="font-size:4rem;display:inline-block;">🍪</span>',
+                tagline: 'Σπιτικά τραγανά μπισκότα με κομματάκια σοκολάτας!',
+                recipe: 'Χτυπάμε βούτυρο με καστανή ζάχαρη και αυγό, προσθέτουμε αλεύρι και πλούσια κομματάκια σοκολάτας. Ψήνουμε για 12 λεπτά μέχρι να γίνουν μαλακά στο κέντρο και τραγανά στις άκρες!'
+            },
+            smoothie: {
+                title: 'Σμούθι 🌈',
+                visual: '<span style="font-size:4rem;display:inline-block;">🥤</span>',
+                tagline: 'Βιταμίνες, χρώμα και υπέροχη γεύση!',
+                recipe: 'Χτυπάμε στο μπλέντερ φρέσκες φράουλες, μπανάνα, μια κουταλιά μέλι και λίγο δροσερό γάλα ή γιαούρτι μέχρι να γίνει ένα απαλό, κρεμώδες ρόφημα γεμάτο ενέργεια!'
+            },
+            lemonada: {
+                title: 'Λεμονάδα ☀️',
+                visual: '<img src="lemonade.png" alt="Λεμονάδα" style="height:70px;margin:0 auto;object-fit:contain;filter:drop-shadow(0 4px 10px rgba(0,0,0,0.15));">',
+                tagline: 'Η πιο δροσερή, σπιτική απόλαυση!',
+                recipe: 'Στύβουμε φρέσκα ζουμερά λεμόνια, ανακατεύουμε το χυμό με κρύο νερό και λίγη ζάχαρη, και σερβίρουμε σε ψηλό ποτήρι με παγάκια και ένα κλαδάκι φρέσκου δυόσμου!'
+            }
+        };
+
+        function openRecipeModal(key) {
+            const item = RECIPES[key];
+            if (!item) return;
+            document.getElementById('modalTitle').textContent = item.title;
+            document.getElementById('modalVisual').innerHTML = item.visual;
+            document.getElementById('modalTagline').textContent = item.tagline;
+            document.getElementById('modalRecipe').textContent = item.recipe;
+            document.getElementById('recipeModal').style.display = 'flex';
+        }
+
+        function closeRecipeModal() {
+            document.getElementById('recipeModal').style.display = 'none';
+        }
+
+        // Close on ESC key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeRecipeModal();
+        });
+    </script>
 </body>
 </html>
