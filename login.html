@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="el">
 <head>
     <meta charset="UTF-8">
@@ -64,13 +64,13 @@
                 <div style="margin-bottom:24px;">
                     <label for="usernameInput"
                            style="display:block;font-weight:700;font-size:0.9rem;color:var(--text-dark);margin-bottom:6px;">
-                        👤 Όνομα χρήστη
+                        🔢 Κωδικός εισόδου / Όνομα
                     </label>
                     <input
                         type="text"
                         id="usernameInput"
                         class="form-input"
-                        placeholder="ονομα-επωνυμο"
+                        placeholder="π.χ. 4ψήφιος κωδικός"
                         required
                         autocomplete="username"
                         autocapitalize="none"
@@ -100,15 +100,24 @@
     <footer class="footer">
         <p>
             <strong>🏪 Φαιστός ΦΑΪ</strong> — phaistos-fai.gr<br>
-            <span style="font-size:0.85rem;">© 2025 Φαιστός ΦΑΪ • Φτιαγμένο με 💖 από Αριάδνη &amp; την ομάδα της</span>
+            <span style="font-size:0.85rem;">© 2026 Φαιστός ΦΑΪ • Φτιαγμένο με 💖 από Αριάδνη &amp; την ομάδα της</span>
         </p>
     </footer>
 
     <script>
         // ============================================================
-        // Hardcoded employee credentials
+        // Hardcoded employee credentials & 4-digit PINs
         // ============================================================
         const SHARED_PASSWORD = 'FaiFai2025';
+
+        const PIN_MAP = {
+            '3142': 'ariadni-papadaki',    // Αριάδνη Παπαδάκη
+            '1313': 'petros-papadakis',    // Πέτρος Παπαδάκης
+            '2001': 'natalia-antonakaki',  // Ναταλία Αντωνακάκη
+            '2012': 'maria-tsatsaroni',    // Μαρία Τσατσαρώνη
+            '2145': 'maria-doukaki',       // Μαρία Δουκάκη
+            '2019': 'eirini-papadaki'      // Ειρήνη Παπαδάκη
+        };
 
         const EMPLOYEES = {
             'ariadni-papadaki':    { name: 'Αριάδνη',  surname: 'Παπαδάκη',    role: 'Αφεντικό',       photo: 'employees/ariadni.jpg' },
@@ -142,18 +151,18 @@
             let username = usernameInput.value.trim().toLowerCase();
             const password = passwordInput.value;
 
-            // Ariadni shortcut PIN
-            if (username === '3142') {
-                username = 'ariadni-papadaki';
+            // Check if 4-digit PIN was provided
+            if (PIN_MAP[username]) {
+                username = PIN_MAP[username];
             }
 
             if (!EMPLOYEES[username]) {
-                showError('❌ Δεν βρέθηκε αυτός ο χρήστης. Έλεγξε το όνομά σου!');
+                showError('❌ Λάθος κωδικός ή όνομα. Δοκίμασε ξανά!');
                 return;
             }
 
             if (password !== SHARED_PASSWORD) {
-                showError('❌ Λάθος κωδικός. Δοκίμασε ξανά!');
+                showError('❌ Σφάλμα εισόδου. Δοκίμασε ξανά!');
                 return;
             }
 
