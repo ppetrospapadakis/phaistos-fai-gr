@@ -5,8 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Φαιστός ΦΑΪ 🍓 | Τα πιο νόστιμα προϊόντα!</title>
     <meta name="description" content="Φαιστός ΦΑΪ - Η φανταστική μας εταιρεία τροφίμων! Φράουλες, μπισκότα, γιουβαρλάκια και πολλά ακόμα!">
-    <meta name="author" content="Αριάδνη & Πέτρος">
+    <meta name="author" content="Αριάδνη &amp; η ομάδα της">
     <meta name="theme-color" content="#F97316">
+    <link rel="canonical" href="https://phaistos-fai.gr/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://phaistos-fai.gr/">
+    <meta property="og:title" content="Φαιστός ΦΑΪ 🍓 | Τα πιο νόστιμα προϊόντα!">
+    <meta property="og:description" content="Η πιο νόστιμη οικογενειακή εταιρεία τροφίμων! Φράουλες, μπισκότα, πίτσα, γιουβαρλάκια και πολλά ακόμα!">
+    <meta property="og:image" content="https://phaistos-fai.gr/logo.jpg">
+
+    <!-- Preconnect Google Fonts for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -26,6 +38,20 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
+
+    <!-- Structured Data (JSON-LD) for Google Search -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FoodEstablishment",
+      "name": "Φαιστός ΦΑΪ",
+      "url": "https://phaistos-fai.gr",
+      "logo": "https://phaistos-fai.gr/logo.jpg",
+      "image": "https://phaistos-fai.gr/logo.jpg",
+      "description": "Τα πιο νόστιμα προϊόντα φτιαγμένα με αγάπη από την Αριάδνη & την ομάδα της!",
+      "priceRange": "10λ - 90λ"
+    }
+    </script>
 </head>
 <body class="min-h-screen">
 
@@ -143,10 +169,5 @@
             <span style="font-size:0.85rem;">© 2026 Φαιστός ΦΑΪ • Φτιαγμένο με 💖 από Αριάδνη &amp; την ομάδα της</span>
         </p>
     </footer>
-
-    <!-- Supabase JS SDK -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="supabase-config.js"></script>
-
 </body>
 </html>
