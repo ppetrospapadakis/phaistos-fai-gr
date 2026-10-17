@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="el">
 <head>
     <meta charset="UTF-8">
@@ -67,14 +67,18 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
 
             <div class="product-card cursor-pointer" onclick="openRecipeModal('pizza')">
-                <span class="product-emoji">🍕</span>
+                <div style="height:64px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;">
+                    <img src="products/pizza.png" alt="Πίτσα" style="max-height:60px;max-width:80px;object-fit:contain;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.12);">
+                </div>
                 <div class="product-name">Πίτσα</div>
                 <p class="product-desc">Ζεστή, τραγανή πίτσα φτιαγμένη με αγάπη! Η πιο αγαπημένη γεύση! 🍕</p>
                 <span style="font-size:0.82rem;font-weight:700;color:var(--orange);">👉 Πάτα για τη συνταγή!</span>
             </div>
 
             <div class="product-card cursor-pointer" onclick="openRecipeModal('youvarlakia')">
-                <span class="product-emoji">🍲</span>
+                <div style="height:64px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;">
+                    <img src="products/youvarlakia.png" alt="Γιουβαρλάκια" style="max-height:60px;max-width:80px;object-fit:contain;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.12);">
+                </div>
                 <div class="product-name">Γιουβαρλάκια</div>
                 <p class="product-desc">Παραδοσιακά γιουβαρλάκια αυγολέμονο, όπως τα έφτιαχνε η γιαγιά! 🥰</p>
                 <span style="font-size:0.82rem;font-weight:700;color:var(--orange);">👉 Πάτα για τη συνταγή!</span>
@@ -82,7 +86,7 @@
 
             <div class="product-card cursor-pointer" onclick="openRecipeModal('dolmadakia')">
                 <div style="height:64px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;">
-                    <img src="dolmadaki.png" alt="Ντολμαδάκια" style="height:56px;max-width:80px;object-fit:cover;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.15);">
+                    <img src="products/dolmadakia.png" alt="Ντολμαδάκια" style="max-height:60px;max-width:80px;object-fit:contain;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.12);">
                 </div>
                 <div class="product-name">Ντολμαδάκια</div>
                 <p class="product-desc">Νόστιμα ντολμαδάκια με ρύζι, τυλιγμένα με μεράκι! 💚</p>
@@ -90,7 +94,9 @@
             </div>
 
             <div class="product-card cursor-pointer" onclick="openRecipeModal('popcorn')">
-                <span class="product-emoji">🍿</span>
+                <div style="height:64px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;">
+                    <img src="products/popcorn.png" alt="Ποπ Κορν" style="max-height:60px;max-width:80px;object-fit:contain;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.12);">
+                </div>
                 <div class="product-name">Ποπ Κορν</div>
                 <p class="product-desc">Αφράτο και τραγανό ποπ κορν! Ιδανικό για σινεμά στο σπίτι! 🎬</p>
                 <span style="font-size:0.82rem;font-weight:700;color:var(--orange);">👉 Πάτα για τη συνταγή!</span>
@@ -104,21 +110,27 @@
             </div>
 
             <div class="product-card cursor-pointer" onclick="openRecipeModal('psomi')">
-                <span class="product-emoji">🍞</span>
+                <div style="height:64px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;">
+                    <img src="products/psomi.png" alt="Ψωμί" style="max-height:60px;max-width:80px;object-fit:contain;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.12);">
+                </div>
                 <div class="product-name">Ψωμί</div>
                 <p class="product-desc">Φρεσκοψημένο ψωμί κάθε μέρα — η μυρωδιά γεμίζει το σπίτι! 🌅</p>
                 <span style="font-size:0.82rem;font-weight:700;color:var(--orange);">👉 Πάτα για τη συνταγή!</span>
             </div>
 
             <div class="product-card cursor-pointer" onclick="openRecipeModal('fraoules')">
-                <span class="product-emoji">🍓</span>
+                <div style="height:64px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;">
+                    <img src="products/fraoules.png" alt="Φράουλες" style="max-height:60px;max-width:80px;object-fit:contain;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.12);">
+                </div>
                 <div class="product-name">Φράουλες</div>
                 <p class="product-desc">Φρέσκες, γλυκές φράουλες! Το αγαπημένο φρούτο της Αριάδνης! 💕</p>
                 <span style="font-size:0.82rem;font-weight:700;color:var(--orange);">👉 Πάτα για τη συνταγή!</span>
             </div>
 
             <div class="product-card cursor-pointer" onclick="openRecipeModal('mpiskota')">
-                <span class="product-emoji">🍪</span>
+                <div style="height:64px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;">
+                    <img src="products/mpiskota.png" alt="Μπισκότα" style="max-height:60px;max-width:80px;object-fit:contain;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.12);">
+                </div>
                 <div class="product-name">Μπισκότα</div>
                 <p class="product-desc">Σπιτικά μπισκότα με σοκολάτα — τραγανά και φτιαγμένα με αγάπη! 🍫</p>
                 <span style="font-size:0.82rem;font-weight:700;color:var(--orange);">👉 Πάτα για τη συνταγή!</span>
@@ -133,7 +145,7 @@
 
             <div class="product-card cursor-pointer" onclick="openRecipeModal('lemonada')">
                 <div style="height:64px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;">
-                    <img src="lemonade.png" alt="Λεμονάδα" style="height:60px;object-fit:contain;">
+                    <img src="products/lemonada.png" alt="Λεμονάδα" style="max-height:60px;max-width:80px;object-fit:contain;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.12);">
                 </div>
                 <div class="product-name">Λεμονάδα</div>
                 <p class="product-desc">Σπιτική λεμονάδα — η πιο δροσιστική επιλογή του καλοκαιριού! ☀️</p>
@@ -191,25 +203,25 @@
         const RECIPES = {
             pizza: {
                 title: 'Πίτσα 🍕',
-                visual: '<span style="font-size:4rem;display:inline-block;">🍕</span>',
+                visual: '<img src="products/pizza.png" alt="Πίτσα" style="max-height:90px;margin:0 auto;object-fit:contain;border-radius:12px;filter:drop-shadow(0 4px 10px rgba(0,0,0,0.15));">',
                 tagline: 'Ζεστή και τραγανή πίτσα με πλούσια λιωμένα τυριά!',
                 recipe: 'Ανοίγουμε αφράτη ζύμη, απλώνουμε σπιτική σάλτσα ντομάτας με ρίγανη, ρίχνουμε άφθονο τυρί μοτσαρέλα και ψήνουμε σε δυνατή φωτιά μέχρι να ροδίσει και να γίνει σούπερ τραγανή!'
             },
             youvarlakia: {
                 title: 'Γιουβαρλάκια 🍲',
-                visual: '<span style="font-size:4rem;display:inline-block;">🍲</span>',
+                visual: '<img src="products/youvarlakia.png" alt="Γιουβαρλάκια" style="max-height:90px;margin:0 auto;object-fit:contain;border-radius:12px;filter:drop-shadow(0 4px 10px rgba(0,0,0,0.15));">',
                 tagline: 'Η κλασική ζεστή σούπα της γιαγιάς!',
                 recipe: 'Πλάθουμε μικρά μπαλάκια από μοσχαρίσιο κιμά, ρυζάκι, κρεμμυδάκι και μυρωδικά. Τα βράζουμε σε νόστιμο ζωμό και στο τέλος προσθέτουμε πλούσιο, βελούδινο αυγολέμονο!'
             },
             dolmadakia: {
                 title: 'Ντολμαδάκια 🫔',
-                visual: '<img src="dolmadaki.png" alt="Ντολμαδάκια" style="height:70px;margin:0 auto;object-fit:contain;filter:drop-shadow(0 4px 10px rgba(0,0,0,0.15));">',
+                visual: '<img src="products/dolmadakia.png" alt="Ντολμαδάκια" style="max-height:90px;margin:0 auto;object-fit:contain;border-radius:12px;filter:drop-shadow(0 4px 10px rgba(0,0,0,0.15));">',
                 tagline: 'Τρυφερά αμπελόφυλλα γεμιστά με μεράκι!',
                 recipe: 'Τυλίγουμε προσεκτικά στα τρυφερά αμπελόφυλλα ρύζι, άνηθο, φρέσκο δυόσμο και κρεμμυδάκι. Τα μαγειρεύουμε σιγά-σιγά στην κατσαρόλα με ελαιόλαδο και πολύ χυμό λεμονιού!'
             },
             popcorn: {
                 title: 'Ποπ Κορν 🍿',
-                visual: '<span style="font-size:4rem;display:inline-block;">🍿</span>',
+                visual: '<img src="products/popcorn.png" alt="Ποπ Κορν" style="max-height:90px;margin:0 auto;object-fit:contain;border-radius:12px;filter:drop-shadow(0 4px 10px rgba(0,0,0,0.15));">',
                 tagline: 'Το απόλυτο τραγανό σνακ για ταινία!',
                 recipe: 'Βάζουμε σπόρους καλαμποκιού σε κατσαρόλα με λίγο λάδι και καπάκι. Περιμένουμε το απολαυστικό "ποπ-ποπ-ποπ" και μόλις ανοίξουν όλα, πασπαλίζουμε με λίγο θαλασσινό αλάτι!'
             },
@@ -221,19 +233,19 @@
             },
             psomi: {
                 title: 'Ψωμί 🍞',
-                visual: '<span style="font-size:4rem;display:inline-block;">🍞</span>',
+                visual: '<img src="products/psomi.png" alt="Ψωμί" style="max-height:90px;margin:0 auto;object-fit:contain;border-radius:12px;filter:drop-shadow(0 4px 10px rgba(0,0,0,0.15));">',
                 tagline: 'Ζεστό, φρεσκοψημένο με τραγανή κόρα!',
                 recipe: 'Ζυμώνουμε εκλεκτό αλεύρι με νεράκι, μαγιά και λίγο αλάτι. Αφήνουμε το ζυμάρι να ξεκουραστεί και να φουσκώσει, και ψήνουμε στο φούρνο μέχρι να μοσχομυρίσει ολόκληρη η γειτονιά!'
             },
             fraoules: {
                 title: 'Φράουλες 🍓',
-                visual: '<span style="font-size:4rem;display:inline-block;">🍓</span>',
+                visual: '<img src="products/fraoules.png" alt="Φράουλες" style="max-height:90px;margin:0 auto;object-fit:contain;border-radius:12px;filter:drop-shadow(0 4px 10px rgba(0,0,0,0.15));">',
                 tagline: 'Το αγαπημένο φρούτο της Αριάδνης!',
                 recipe: 'Διαλέγουμε τις πιο κατακόκκινες και γλυκές φράουλες, τις πλένουμε προσεκτικά και τις σερβίρουμε δροσερές — είτε σκέτες είτε με λίγη ζάχαρη ή λιωμένη σοκολάτα!'
             },
             mpiskota: {
                 title: 'Μπισκότα 🍪',
-                visual: '<span style="font-size:4rem;display:inline-block;">🍪</span>',
+                visual: '<img src="products/mpiskota.png" alt="Μπισκότα" style="max-height:90px;margin:0 auto;object-fit:contain;border-radius:12px;filter:drop-shadow(0 4px 10px rgba(0,0,0,0.15));">',
                 tagline: 'Σπιτικά τραγανά μπισκότα με κομματάκια σοκολάτας!',
                 recipe: 'Χτυπάμε βούτυρο με καστανή ζάχαρη και αυγό, προσθέτουμε αλεύρι και πλούσια κομματάκια σοκολάτας. Ψήνουμε για 12 λεπτά μέχρι να γίνουν μαλακά στο κέντρο και τραγανά στις άκρες!'
             },
@@ -245,7 +257,7 @@
             },
             lemonada: {
                 title: 'Λεμονάδα ☀️',
-                visual: '<img src="lemonade.png" alt="Λεμονάδα" style="height:70px;margin:0 auto;object-fit:contain;filter:drop-shadow(0 4px 10px rgba(0,0,0,0.15));">',
+                visual: '<img src="products/lemonada.png" alt="Λεμονάδα" style="max-height:90px;margin:0 auto;object-fit:contain;border-radius:12px;filter:drop-shadow(0 4px 10px rgba(0,0,0,0.15));">',
                 tagline: 'Η πιο δροσερή, σπιτική απόλαυση!',
                 recipe: 'Στύβουμε φρέσκα ζουμερά λεμόνια, ανακατεύουμε το χυμό με κρύο νερό και λίγη ζάχαρη, και σερβίρουμε σε ψηλό ποτήρι με παγάκια και ένα κλαδάκι φρέσκου δυόσμου!'
             }
