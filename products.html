@@ -103,7 +103,9 @@
             </div>
 
             <div class="product-card cursor-pointer" onclick="openRecipeModal('patatakia')">
-                <span class="product-emoji">🍟</span>
+                <div style="height:64px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;">
+                    <img src="products/patatakia.png" alt="Πατατάκια" style="max-height:60px;max-width:80px;object-fit:contain;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.12);">
+                </div>
                 <div class="product-name">Πατατάκια</div>
                 <p class="product-desc">Τραγανά πατατάκια που δεν μπορείς να σταματήσεις να τρως! 😋</p>
                 <span style="font-size:0.82rem;font-weight:700;color:var(--orange);">👉 Πάτα για τη συνταγή!</span>
@@ -227,7 +229,7 @@
             },
             patatakia: {
                 title: 'Πατατάκια 🍟',
-                visual: '<span style="font-size:4rem;display:inline-block;">🍟</span>',
+                visual: '<img src="products/patatakia.png" alt="Πατατάκια" style="max-height:90px;margin:0 auto;object-fit:contain;border-radius:12px;filter:drop-shadow(0 4px 10px rgba(0,0,0,0.15));">',
                 tagline: 'Τραγανά, χρυσαφένια και ακαταμάχητα!',
                 recipe: 'Κόβουμε φρέσκες πατάτες σε λεπτές ροδέλες, τις στεγνώνουμε καλά και τις τηγανίζουμε σε καθαρό λάδι μέχρι να γίνουν χρυσαφένιες και απόλυτα τραγανές!'
             },
