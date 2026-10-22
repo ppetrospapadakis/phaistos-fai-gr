@@ -41,13 +41,22 @@
             <img src="logo.jpg" alt="Φαιστός ΦΑΪ Logo" style="height:44px;width:44px;object-fit:contain;border-radius:50%;background:#fff;padding:2px;">
             Φαιστός <span class="brand-dot">ΦΑΪ</span>
         </a>
-        <ul class="navbar-links">
-            <li><a href="index.html">🏠 Αρχική</a></li>
-            <li><a href="products.html" class="active">🛒 Προϊόντα</a></li>
-            <li><a href="menu.html">📋 Τιμοκατάλογος</a></li>
-            <li><a href="about.html">👥 Ποιοι Είμαστε</a></li>
-            <li><a href="employees.html" class="nav-protected">🔒 Εργαζόμενοι</a></li>
-        </ul>
+                <div class="navbar-links-wrapper">
+            <button class="nav-scroll-arrow nav-arrow-left" type="button" aria-label="Πλοήγηση αριστερά">
+                <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            <ul class="navbar-links">
+                <li><a href="index.html">🏠 Αρχική</a></li>
+                <li><a href="products.html" class="active">🛒 Προϊόντα</a></li>
+                <li><a href="menu.html">📋 Τιμοκατάλογος</a></li>
+                <li><a href="drawings.html">🎨 Ζωγραφιές</a></li>
+                <li><a href="about.html">👥 Ποιοι Είμαστε</a></li>
+                <li><a href="employees.html" class="nav-protected">🔒 Εργαζόμενοι</a></li>
+            </ul>
+            <button class="nav-scroll-arrow nav-arrow-right hint-pulse" type="button" aria-label="Πλοήγηση δεξιά">
+                <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+        </div>
     </nav>
 
     <!-- Hero -->
@@ -284,5 +293,6 @@
             if (e.key === 'Escape') closeRecipeModal();
         });
     </script>
+    <script src="nav.js"></script>
 </body>
 </html>

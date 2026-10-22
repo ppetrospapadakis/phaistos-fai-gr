@@ -70,13 +70,22 @@
             <img src="logo.jpg" alt="Φαιστός ΦΑΪ Logo" style="height:44px;width:44px;object-fit:contain;border-radius:50%;background:#fff;padding:2px;">
             Φαιστός <span class="brand-dot">ΦΑΪ</span>
         </a>
-        <ul class="navbar-links">
-            <li><a href="index.html" class="active">🏠 Αρχική</a></li>
-            <li><a href="products.html">🛒 Προϊόντα</a></li>
-            <li><a href="menu.html">📋 Τιμοκατάλογος</a></li>
-            <li><a href="about.html">👥 Ποιοι Είμαστε</a></li>
-            <li><a href="employees.html" class="nav-protected">🔒 Εργαζόμενοι</a></li>
-        </ul>
+                <div class="navbar-links-wrapper">
+            <button class="nav-scroll-arrow nav-arrow-left" type="button" aria-label="Πλοήγηση αριστερά">
+                <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            <ul class="navbar-links">
+                <li><a href="index.html" class="active">🏠 Αρχική</a></li>
+                <li><a href="products.html">🛒 Προϊόντα</a></li>
+                <li><a href="menu.html">📋 Τιμοκατάλογος</a></li>
+                <li><a href="drawings.html">🎨 Ζωγραφιές</a></li>
+                <li><a href="about.html">👥 Ποιοι Είμαστε</a></li>
+                <li><a href="employees.html" class="nav-protected">🔒 Εργαζόμενοι</a></li>
+            </ul>
+            <button class="nav-scroll-arrow nav-arrow-right hint-pulse" type="button" aria-label="Πλοήγηση δεξιά">
+                <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+        </div>
     </nav>
 
     <!-- Hero Section -->
@@ -153,6 +162,23 @@
         </div>
     </section>
 
+    
+    <!-- Food Drawings & Packaging Teaser -->
+    <section style="position:relative;z-index:1;max-width:800px;margin:0 auto 36px;padding:0 20px;">
+        <div class="card text-center" style="background:linear-gradient(135deg,#FFF7ED,#FEF3C7);border-color:#FDBA74;box-shadow:0 10px 30px rgba(249,115,22,0.12);">
+            <div style="font-size:3rem;margin-bottom:10px;">🎨📦✨</div>
+            <h2 class="section-title" style="color:var(--orange-dark);font-size:1.7rem;">Ζωγράφισε &amp; Μπες στις Συσκευασίες μας!</h2>
+            <p style="color:#78350F;font-size:1.02rem;line-height:1.6;margin-bottom:20px;max-width:620px;margin-left:auto;margin-right:auto;">
+                Στείλε μας τη φωτογραφία της δικής σου ζωγραφιάς με φαγητά! Οι καλύτερες ζωγραφιές επιλέγονται από την <strong>Αριάδνη (7 ετών)</strong> για να διακοσμήσουν τα πραγματικά κουτιά και σακουλάκια του <strong>Φαιστός ΦΑΪ</strong>!
+            </p>
+            <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+                <a href="drawings.html" class="btn btn-orange text-white" style="box-shadow:0 4px 15px rgba(249,115,22,0.3);">
+                    🎨 Δες τις Ζωγραφιές &amp; Ανέβασε τη Δική σου!
+                </a>
+            </div>
+        </div>
+    </section>
+
     <!-- About Teaser -->
     <section style="position:relative;z-index:1;max-width:800px;margin:0 auto;padding:0 20px 60px;">
         <div class="card text-center" style="background:linear-gradient(135deg,#ECFDF5,#D1FAE5);border-color:#86EFAC;">
@@ -175,5 +201,6 @@
             <span style="font-size:0.85rem;">© 2026 Φαιστός ΦΑΪ • Φτιαγμένο με 💖 από την Αριάδνη &amp; την ομάδα της</span>
         </p>
     </footer>
+    <script src="nav.js"></script>
 </body>
 </html>

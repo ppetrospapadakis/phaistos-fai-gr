@@ -108,17 +108,35 @@
             <img src="logo.jpg" alt="Φαιστός ΦΑΪ Logo" style="height:44px;width:44px;object-fit:contain;border-radius:50%;background:#fff;padding:2px;">
             Φαιστός <span class="brand-dot">ΦΑΪ</span>
         </a>
-        <ul class="navbar-links">
-            <li><a href="index.html">🏠 Αρχική</a></li>
-            <li><a href="products.html">🛒 Προϊόντα</a></li>
-            <li><a href="menu.html">📋 Τιμοκατάλογος</a></li>
-            <li><a href="about.html">👥 Ποιοι Είμαστε</a></li>
-            <li><a href="employees.html" class="active nav-protected">🔒 Εργαζόμενοι</a></li>
-        </ul>
+                <div class="navbar-links-wrapper">
+            <button class="nav-scroll-arrow nav-arrow-left" type="button" aria-label="Πλοήγηση αριστερά">
+                <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            <ul class="navbar-links">
+                <li><a href="index.html">🏠 Αρχική</a></li>
+                <li><a href="products.html">🛒 Προϊόντα</a></li>
+                <li><a href="menu.html">📋 Τιμοκατάλογος</a></li>
+                <li><a href="drawings.html">🎨 Ζωγραφιές</a></li>
+                <li><a href="about.html">👥 Ποιοι Είμαστε</a></li>
+                <li><a href="employees.html" class="active nav-protected">🔒 Εργαζόμενοι</a></li>
+            </ul>
+            <button class="nav-scroll-arrow nav-arrow-right hint-pulse" type="button" aria-label="Πλοήγηση δεξιά">
+                <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+        </div>
     </nav>
 
     <!-- Protected Content -->
     <div class="protected-page" id="mainContent">
+        <!-- Section Navigation Tabs -->
+        <div style="max-width:860px;margin:24px auto 0;padding:0 20px;display:flex;gap:12px;border-bottom:2px solid var(--cream-dark);padding-bottom:12px;flex-wrap:wrap;">
+            <button id="tabForumBtn" class="btn btn-orange text-white" style="padding:10px 20px;font-size:0.95rem;">
+                💬 Φόρουμ Συζητήσεων
+            </button>
+            <button id="tabDrawingsBtn" class="btn btn-outline" style="padding:10px 20px;font-size:0.95rem;display:inline-flex;align-items:center;gap:6px;">
+                🎨 Έγκριση Ζωγραφιών <span id="empDrawingsBadge" style="background:#EF4444;color:white;padding:2px 8px;border-radius:12px;font-size:0.75rem;font-weight:800;display:none;">0</span>
+            </button>
+        </div>
         <section id="forumSection" style="max-width:860px;margin:0 auto;padding:32px 20px 60px;">
 
             <!-- Topics View -->
@@ -262,7 +280,133 @@
         userBar.style.display     = 'flex';
         mainContent.style.display = 'block';
 
-        loadTopics();
+        
+    loadTopics();
+    loadEmpDrawings();
+
+    // ── Tab Navigation ────────────────────────────────────────────────
+    const tabForumBtn = document.getElementById('tabForumBtn');
+    const tabDrawingsBtn = document.getElementById('tabDrawingsBtn');
+    const forumSection = document.getElementById('forumSection');
+    const drawingsApprovalSection = document.getElementById('drawingsApprovalSection');
+    const refreshEmpDrawingsBtn = document.getElementById('refreshEmpDrawingsBtn');
+    const empDrawingsBadge = document.getElementById('empDrawingsBadge');
+    const empDrawingsList = document.getElementById('empDrawingsList');
+    const empDrawingsStatus = document.getElementById('empDrawingsStatus');
+
+    tabForumBtn.addEventListener('click', () => {
+        tabForumBtn.className = 'btn btn-orange text-white';
+        tabDrawingsBtn.className = 'btn btn-outline';
+        forumSection.style.display = 'block';
+        drawingsApprovalSection.style.display = 'none';
+    });
+
+    tabDrawingsBtn.addEventListener('click', () => {
+        tabDrawingsBtn.className = 'btn btn-orange text-white';
+        tabForumBtn.className = 'btn btn-outline';
+        forumSection.style.display = 'none';
+        drawingsApprovalSection.style.display = 'block';
+        loadEmpDrawings();
+    });
+
+    refreshEmpDrawingsBtn.addEventListener('click', loadEmpDrawings);
+
+    async function loadEmpDrawings() {
+        if (!window.supabaseClient) return;
+        empDrawingsStatus.style.display = 'block';
+        empDrawingsStatus.textContent = '⏳ Φόρτωση ζωγραφιών...';
+        empDrawingsList.innerHTML = '';
+
+        try {
+            const { data, error } = await supabaseClient
+                .from('cats')
+                .select('*')
+                .eq('domain', 'phaistos-fai')
+                .order('created_at', { ascending: false });
+
+            if (error) throw error;
+
+            empDrawingsStatus.style.display = 'none';
+
+            if (!data || data.length === 0) {
+                empDrawingsBadge.style.display = 'none';
+                empDrawingsList.innerHTML = '<div style="text-align:center;padding:40px;background:white;border-radius:16px;color:var(--text-muted);">Δεν έχουν υποβληθεί ακόμα ζωγραφιές από επισκέπτες.</div>';
+                return;
+            }
+
+            const pendingCount = data.filter(d => d.status === 'pending').length;
+            if (pendingCount > 0) {
+                empDrawingsBadge.textContent = pendingCount;
+                empDrawingsBadge.style.display = 'inline-block';
+            } else {
+                empDrawingsBadge.style.display = 'none';
+            }
+
+            empDrawingsList.innerHTML = data.map(d => {
+                const isApproved = d.status === 'approved';
+                const isPackaging = (d.bio || '').includes('[PACKAGING]');
+                const cleanBio = (d.bio || '').replace(/🎨s*[PHAISTOS_DRAWING]s*/g, '').replace(/[PACKAGING]s*/g, '').trim();
+
+                return `
+                    <div style="background:white;border-radius:16px;padding:18px;border:2px solid var(--cream-dark);box-shadow:0 4px 12px rgba(0,0,0,0.04);display:flex;gap:18px;align-items:center;flex-wrap:wrap;">
+                        <img src="${d.image}" alt="${d.name}" style="width:110px;height:90px;object-fit:contain;border-radius:10px;background:#FFFDF9;border:1px solid #E5E7EB;flex-shrink:0;">
+                        <div style="flex:1;min-width:200px;">
+                            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px;">
+                                <h3 style="font-family:'Fredoka',cursive;font-size:1.2rem;margin:0;color:var(--text-dark);">${d.name}</h3>
+                                ${isPackaging ? '<span style="background:#16A34A;color:white;font-size:0.75rem;font-weight:800;padding:2px 8px;border-radius:12px;">📦 Στη Συσκευασία</span>' : ''}
+                                ${!isApproved ? '<span style="background:#F59E0B;color:white;font-size:0.75rem;font-weight:800;padding:2px 8px;border-radius:12px;">⏳ Εκκρεμεί</span>' : '<span style="background:#10B981;color:white;font-size:0.75rem;font-weight:800;padding:2px 8px;border-radius:12px;">✅ Εγκεκριμένη</span>'}
+                            </div>
+                            <div style="font-size:0.88rem;color:var(--orange-dark);font-weight:700;">👤 ${d.owner} &bull; 📅 ${d.date || ''}</div>
+                            ${cleanBio ? `<p style="font-size:0.85rem;color:var(--text-muted);font-style:italic;margin-top:4px;">"${cleanBio}"</p>` : ''}
+                        </div>
+                        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                            ${!isApproved ? `<button onclick="empApproveDrawing('${d.id}')" class="btn btn-green" style="padding:8px 14px;font-size:0.85rem;">✅ Έγκριση</button>` : ''}
+                            <button onclick="empTogglePackaging('${d.id}', ${!isPackaging})" class="btn" style="background:#FEF3C7;color:#92400E;border:1.5px solid #FDE68A;padding:8px 14px;font-size:0.85rem;font-weight:700;">
+                                ${isPackaging ? '❌ Αφαίρεση Συσκευασίας' : '📦 Για Συσκευασία'}
+                            </button>
+                            <button onclick="empDeleteDrawing('${d.id}')" class="btn" style="background:#FEE2E2;color:#DC2626;border:1.5px solid #FECACA;padding:8px 12px;font-size:0.85rem;">
+                                🗑️
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        } catch(err) {
+            empDrawingsStatus.textContent = 'Σφάλμα φόρτωσης: ' + err.message;
+        }
+    }
+
+    window.empApproveDrawing = async function(id) {
+        if (!confirm('Έγκριση της ζωγραφιάς για δημοσίευση στο site;')) return;
+        try {
+            await supabaseClient.from('cats').update({ status: 'approved' }).eq('id', id);
+            loadEmpDrawings();
+        } catch(e) { alert(e.message); }
+    };
+
+    window.empTogglePackaging = async function(id, setPackaging) {
+        try {
+            const { data } = await supabaseClient.from('cats').select('bio').eq('id', id).single();
+            let currentBio = data ? (data.bio || '') : '';
+            if (setPackaging) {
+                if (!currentBio.includes('[PACKAGING]')) currentBio += ' [PACKAGING]';
+                await supabaseClient.from('cats').update({ status: 'approved', bio: currentBio }).eq('id', id);
+            } else {
+                currentBio = currentBio.replace(/[PACKAGING]/g, '').trim();
+                await supabaseClient.from('cats').update({ bio: currentBio }).eq('id', id);
+            }
+            loadEmpDrawings();
+        } catch(e) { alert(e.message); }
+    };
+
+    window.empDeleteDrawing = async function(id) {
+        if (!confirm('Οριστική διαγραφή αυτής της ζωγραφιάς;')) return;
+        try {
+            await supabaseClient.from('cats').delete().eq('id', id);
+            loadEmpDrawings();
+        } catch(e) { alert(e.message); }
+    };
+
     }
 
     // ── Logout ────────────────────────────────────────────────────────
@@ -467,5 +611,6 @@
     // ── Start ─────────────────────────────────────────────────────────
     init();
     </script>
+    <script src="nav.js"></script>
 </body>
 </html>

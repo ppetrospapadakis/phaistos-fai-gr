@@ -72,6 +72,7 @@ a, button, input, select, textarea {
     align-items: center;
     justify-content: space-between;
     height: 68px;
+    gap: 16px;
 }
 
 .navbar-brand {
@@ -84,6 +85,7 @@ a, button, input, select, textarea {
     font-weight: 700;
     color: var(--orange);
     white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .navbar-brand:hover {
@@ -92,6 +94,17 @@ a, button, input, select, textarea {
 
 .navbar-brand .brand-dot {
     color: var(--green);
+}
+
+/* Navbar Links Wrapper & Horizontal Scroll */
+.navbar-links-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    min-width: 0;
+    flex: 1;
+    justify-content: flex-end;
 }
 
 .navbar-links {
@@ -103,6 +116,8 @@ a, button, input, select, textarea {
     scrollbar-width: none;
     -ms-overflow-style: none;
     padding: 4px 0;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
 }
 
 .navbar-links::-webkit-scrollbar { display: none; }
@@ -117,6 +132,7 @@ a, button, input, select, textarea {
     color: var(--text-dark);
     background: transparent;
     border: 2px solid transparent;
+    transition: all var(--transition);
 }
 
 .navbar-links a:hover {
@@ -144,8 +160,93 @@ a, button, input, select, textarea {
     box-shadow: 0 6px 16px rgba(22, 163, 74, 0.35);
 }
 
-/* Mobile: logo top row, links bottom row */
-@media (max-width: 640px) {
+/* Scroll Arrows for Mobile / Overflow */
+.nav-scroll-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%) scale(0.9);
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1.5px solid var(--orange);
+    color: var(--orange-dark);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 25;
+    box-shadow: 0 3px 10px rgba(249, 115, 22, 0.25);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 0;
+}
+
+.nav-scroll-arrow.visible {
+    opacity: 0.95;
+    pointer-events: auto;
+    transform: translateY(-50%) scale(1);
+}
+
+.nav-scroll-arrow:hover {
+    background: #FFF7ED;
+    transform: translateY(-50%) scale(1.12);
+    box-shadow: 0 4px 14px rgba(249, 115, 22, 0.45);
+}
+
+.nav-scroll-arrow.nav-arrow-left {
+    left: 2px;
+}
+
+.nav-scroll-arrow.nav-arrow-right {
+    right: 2px;
+}
+
+/* Gentle hint-pulse animation for right scroll arrow on mobile */
+@keyframes navHintPulse {
+    0%, 100% {
+        transform: translateY(-50%) scale(1);
+        box-shadow: 0 2px 8px rgba(249, 115, 22, 0.35);
+    }
+    50% {
+        transform: translateY(-50%) scale(1.18);
+        box-shadow: 0 4px 16px rgba(249, 115, 22, 0.65);
+        background: #FFF7ED;
+    }
+}
+.nav-scroll-arrow.hint-pulse {
+    animation: navHintPulse 1.8s ease-in-out infinite;
+}
+
+/* Edge Fade Shadows to clearly show scrollability */
+.navbar-links-wrapper::before,
+.navbar-links-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 24px;
+    z-index: 10;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+.navbar-links-wrapper.has-scroll-left::before {
+    left: 0;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0));
+    opacity: 1;
+}
+.navbar-links-wrapper.has-scroll-right::after {
+    right: 0;
+    background: linear-gradient(to left, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0));
+    opacity: 1;
+}
+
+/* Mobile: logo top row, links bottom row with scroll arrows */
+@media (max-width: 768px) {
     .navbar {
         flex-direction: column;
         height: auto;
@@ -156,14 +257,23 @@ a, button, input, select, textarea {
         font-size: 1.35rem;
         padding-bottom: 8px;
     }
-    .navbar-links {
-        padding: 6px 0 8px;
-        gap: 6px;
+    .navbar-links-wrapper {
+        width: 100%;
         border-top: 2px solid var(--cream-dark);
+        padding: 4px 0;
+        justify-content: flex-start;
+    }
+    .navbar-links {
+        width: 100%;
+        padding: 6px 28px;
+        gap: 6px;
     }
     .navbar-links a {
         padding: 6px 12px;
         font-size: 0.82rem;
+    }
+    .nav-scroll-arrow {
+        display: inline-flex;
     }
 }
 
@@ -634,4 +744,359 @@ a, button, input, select, textarea {
 @keyframes foodFloat {
     0%, 100% { transform: translateY(0) rotate(0deg);   }
     50%       { transform: translateY(-22px) rotate(12deg); }
+}
+
+/* ===== Drawings Page & Food Art Gallery ===== */
+.drawings-hero {
+    text-align: center;
+    max-width: 860px;
+    margin: 0 auto 36px;
+    padding: 24px 16px 0;
+}
+
+.drawings-hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #FEF3C7;
+    color: #92400E;
+    font-weight: 800;
+    font-size: 0.92rem;
+    padding: 6px 16px;
+    border-radius: var(--radius-full);
+    border: 2px solid #FDE68A;
+    margin-bottom: 14px;
+    box-shadow: 0 2px 8px rgba(245, 158, 11, 0.15);
+}
+
+.packaging-steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+    margin: 28px 0 36px;
+}
+
+.packaging-step-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: 20px 18px;
+    border: 2px solid var(--cream-dark);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    text-align: center;
+    position: relative;
+    transition: all var(--transition);
+}
+
+.packaging-step-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(249, 115, 22, 0.12);
+    border-color: var(--orange-light);
+}
+
+.step-number-badge {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--orange);
+    color: white;
+    font-weight: 800;
+    font-size: 1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+    box-shadow: 0 3px 8px rgba(249, 115, 22, 0.35);
+}
+
+.step-card-title {
+    font-family: 'Fredoka', cursive, sans-serif;
+    font-size: 1.15rem;
+    color: var(--text-dark);
+    margin-bottom: 6px;
+}
+
+.step-card-desc {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    line-height: 1.45;
+}
+
+/* Drawings Grid */
+.drawings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+    margin-top: 24px;
+}
+
+.drawing-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    border: 2.5px solid var(--cream-dark);
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    transition: all var(--transition);
+    position: relative;
+}
+
+.drawing-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--orange);
+    box-shadow: 0 12px 30px rgba(249, 115, 22, 0.15);
+}
+
+.drawing-card-img-wrapper {
+    position: relative;
+    height: 220px;
+    background: #FFFDF9;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-bottom: 2px solid var(--cream-dark);
+    padding: 12px;
+}
+
+.drawing-card-img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+}
+
+.drawing-card-img-wrapper:hover .drawing-card-img {
+    transform: scale(1.05);
+}
+
+.packaging-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: linear-gradient(135deg, #16A34A, #15803D);
+    color: white;
+    font-size: 0.76rem;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: var(--radius-full);
+    box-shadow: 0 3px 8px rgba(22, 163, 74, 0.3);
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    z-index: 2;
+}
+
+.pending-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: linear-gradient(135deg, #F59E0B, #D97706);
+    color: white;
+    font-size: 0.74rem;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: var(--radius-full);
+    box-shadow: 0 3px 8px rgba(245, 158, 11, 0.3);
+    z-index: 2;
+}
+
+.drawing-card-body {
+    padding: 16px 18px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.drawing-card-title {
+    font-family: 'Fredoka', cursive, sans-serif;
+    font-size: 1.25rem;
+    color: var(--text-dark);
+    margin-bottom: 4px;
+}
+
+.drawing-artist-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--orange-dark);
+    background: #FFF7ED;
+    padding: 3px 10px;
+    border-radius: var(--radius-full);
+    margin-bottom: 10px;
+    align-self: flex-start;
+}
+
+.drawing-card-notes {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    font-style: italic;
+    line-height: 1.45;
+    margin-bottom: 14px;
+    flex: 1;
+}
+
+.drawing-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 10px;
+    border-top: 1px dashed #F3F4F6;
+}
+
+.drawing-date {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+}
+
+.drawing-like-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #FFF1F2;
+    color: #E11D48;
+    border: 1.5px solid #FECDD3;
+    padding: 6px 14px;
+    border-radius: var(--radius-full);
+    font-weight: 700;
+    font-size: 0.88rem;
+    cursor: pointer;
+    transition: all var(--transition);
+}
+
+.drawing-like-btn:hover {
+    background: #FFE4E6;
+    border-color: #FDA4AF;
+    transform: scale(1.06);
+}
+
+.drawing-like-btn.liked {
+    background: #E11D48;
+    color: white;
+    border-color: #E11D48;
+    box-shadow: 0 3px 10px rgba(225, 29, 72, 0.3);
+}
+
+/* Upload Modal Form */
+.upload-form-group {
+    margin-bottom: 16px;
+    text-align: left;
+}
+
+.upload-form-label {
+    display: block;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    margin-bottom: 6px;
+}
+
+.upload-form-input {
+    width: 100%;
+    padding: 10px 14px;
+    border: 2px solid var(--cream-dark);
+    border-radius: var(--radius-md);
+    font-family: inherit;
+    font-size: 0.95rem;
+    transition: border-color var(--transition);
+    background: white;
+}
+
+.upload-form-input:focus {
+    outline: none;
+    border-color: var(--orange);
+    box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.15);
+}
+
+.file-dropzone {
+    border: 2.5px dashed var(--orange-light);
+    border-radius: var(--radius-lg);
+    background: #FFFDF9;
+    padding: 22px 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: all var(--transition);
+}
+
+.file-dropzone:hover, .file-dropzone.dragover {
+    border-color: var(--orange);
+    background: #FFF7ED;
+}
+
+.image-preview-wrapper {
+    margin-top: 12px;
+    text-align: center;
+    position: relative;
+    display: inline-block;
+}
+
+.image-preview-img {
+    max-height: 180px;
+    max-width: 100%;
+    border-radius: var(--radius-md);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    border: 2px solid var(--orange-light);
+}
+
+.remove-img-btn {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #EF4444;
+    color: white;
+    border: 2px solid white;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Lightbox Modal */
+.lightbox-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.82);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 2000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    animation: fadeIn 0.2s ease;
+}
+
+.lightbox-content {
+    background: white;
+    border-radius: var(--radius-xl);
+    max-width: 680px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    padding: 24px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+    animation: modalIn 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.lightbox-img {
+    width: 100%;
+    max-height: 440px;
+    object-fit: contain;
+    border-radius: var(--radius-md);
+    background: #FFFDF9;
+    padding: 10px;
+    border: 2px solid var(--cream-dark);
+    margin-bottom: 16px;
 }
