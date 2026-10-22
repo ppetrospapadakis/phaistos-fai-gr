@@ -774,14 +774,8 @@
 
             if (dbInsertOk) {
                 closeUploadModal();
-                // Show success message
-                const successMsg = document.createElement('div');
-                successMsg.style.cssText = 'position:fixed;top:24px;left:50%;transform:translateX(-50%);background:#16A34A;color:white;padding:16px 28px;border-radius:16px;font-weight:800;font-size:1rem;z-index:9999;box-shadow:0 8px 24px rgba(0,0,0,0.15);text-align:center;';
-                successMsg.textContent = '✅ Η ζωγραφιά σου στάλθηκε! Θα εμφανιστεί μετά την έγκριση. 🎉';
-                document.body.appendChild(successMsg);
-                setTimeout(() => successMsg.remove(), 4000);
+                openSuccessModal();
             }
-            openSuccessModal();
         });
 
         // Initialize
