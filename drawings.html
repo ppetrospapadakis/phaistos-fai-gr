@@ -733,22 +733,37 @@
             };
 
             // Insert to Supabase DB 'cats' table with domain 'phaistos-fai'
+            let dbInsertOk = false;
             if (window.supabaseClient) {
+                // If image is still base64 (storage failed), use a placeholder to avoid DB size limits
+                const imageToStore = finalImageUrl.startsWith('data:')
+                    ? 'https://placehold.co/400x300?text=Ζωγραφιά'
+                    : finalImageUrl;
+
                 try {
-                    await supabaseClient.from('cats').insert([{
+                    const { error: dbErr } = await supabaseClient.from('cats').insert([{
                         id: newDrawing.id,
                         name: newDrawing.name,
                         owner: newDrawing.owner,
                         bio: '🎨 [PHAISTOS_DRAWING] ' + (newDrawing.bio || ''),
-                        image: newDrawing.image,
-                        status: newDrawing.status,
+                        image: imageToStore,
+                        status: 'pending',
                         likes: 0,
                         date: newDrawing.date,
                         domain: 'phaistos-fai'
                     }]);
+                    if (dbErr) {
+                        console.error('DB insert error:', dbErr);
+                        alert('Σφάλμα αποθήκευσης: ' + dbErr.message);
+                    } else {
+                        dbInsertOk = true;
+                    }
                 } catch(dbErr) {
-                    console.log('Supabase DB insert notice:', dbErr);
+                    console.error('Supabase DB insert exception:', dbErr);
+                    alert('Σφάλμα σύνδεσης με τη βάση δεδομένων.');
                 }
+            } else {
+                alert('Δεν βρέθηκε σύνδεση με τη βάση δεδομένων. Δοκίμασε ξανά.');
             }
 
             // Save to Supabase only — do NOT add to local list or show publicly (awaits admin approval)
@@ -757,7 +772,15 @@
             submitDrawingBtn.disabled = false;
             submitDrawingBtn.textContent = '🚀 Αποστολή για τις Συσκευασίες! ✨';
 
-            closeUploadModal();
+            if (dbInsertOk) {
+                closeUploadModal();
+                // Show success message
+                const successMsg = document.createElement('div');
+                successMsg.style.cssText = 'position:fixed;top:24px;left:50%;transform:translateX(-50%);background:#16A34A;color:white;padding:16px 28px;border-radius:16px;font-weight:800;font-size:1rem;z-index:9999;box-shadow:0 8px 24px rgba(0,0,0,0.15);text-align:center;';
+                successMsg.textContent = '✅ Η ζωγραφιά σου στάλθηκε! Θα εμφανιστεί μετά την έγκριση. 🎉';
+                document.body.appendChild(successMsg);
+                setTimeout(() => successMsg.remove(), 4000);
+            }
             openSuccessModal();
         });
 
