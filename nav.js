@@ -65,9 +65,21 @@
 
         window.addEventListener('resize', updateArrows, { passive: true });
 
+        // Scroll active nav item into view on load
+        function scrollActiveIntoView() {
+            const activeLink = nav.querySelector('a.active');
+            if (!activeLink) return;
+            const navLeft = nav.getBoundingClientRect().left;
+            const linkLeft = activeLink.getBoundingClientRect().left;
+            const linkCenter = activeLink.offsetLeft + activeLink.offsetWidth / 2;
+            const navCenter = nav.clientWidth / 2;
+            const targetScroll = linkCenter - navCenter;
+            nav.scrollTo({ left: targetScroll, behavior: 'smooth' });
+        }
+
         // Check after DOM layout & fonts are ready
-        setTimeout(updateArrows, 100);
-        setTimeout(updateArrows, 400);
+        setTimeout(() => { updateArrows(); scrollActiveIntoView(); }, 100);
+        setTimeout(() => { updateArrows(); scrollActiveIntoView(); }, 400);
         setTimeout(updateArrows, 1000);
     }
 

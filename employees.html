@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="el">
 <head>
     <meta charset="UTF-8">
@@ -281,37 +281,51 @@
         mainContent.style.display = 'block';
 
         
-    loadTopics();
-    loadEmpDrawings();
+        loadTopics();
 
-    // ── Tab Navigation ────────────────────────────────────────────────
-    const tabForumBtn = document.getElementById('tabForumBtn');
-    const tabDrawingsBtn = document.getElementById('tabDrawingsBtn');
-    const forumSection = document.getElementById('forumSection');
-    const drawingsApprovalSection = document.getElementById('drawingsApprovalSection');
-    const refreshEmpDrawingsBtn = document.getElementById('refreshEmpDrawingsBtn');
-    const empDrawingsBadge = document.getElementById('empDrawingsBadge');
-    const empDrawingsList = document.getElementById('empDrawingsList');
-    const empDrawingsStatus = document.getElementById('empDrawingsStatus');
+        // ── Tab Navigation ────────────────────────────────────────────────
+        const tabForumBtn = document.getElementById('tabForumBtn');
+        const tabDrawingsBtn = document.getElementById('tabDrawingsBtn');
+        const forumSection = document.getElementById('forumSection');
+        const drawingsApprovalSection = document.getElementById('drawingsApprovalSection');
+        const refreshEmpDrawingsBtn = document.getElementById('refreshEmpDrawingsBtn');
+        const empDrawingsBadge = document.getElementById('empDrawingsBadge');
+        const empDrawingsList = document.getElementById('empDrawingsList');
+        const empDrawingsStatus = document.getElementById('empDrawingsStatus');
 
-    tabForumBtn.addEventListener('click', () => {
+        // Load badge count immediately after login
+        loadEmpDrawingsBadge();
+
+        tabForumBtn.addEventListener('click', () => {
         tabForumBtn.className = 'btn btn-orange text-white';
         tabDrawingsBtn.className = 'btn btn-outline';
         forumSection.style.display = 'block';
         drawingsApprovalSection.style.display = 'none';
-    });
+        });
 
-    tabDrawingsBtn.addEventListener('click', () => {
+        tabDrawingsBtn.addEventListener('click', () => {
         tabDrawingsBtn.className = 'btn btn-orange text-white';
         tabForumBtn.className = 'btn btn-outline';
         forumSection.style.display = 'none';
         drawingsApprovalSection.style.display = 'block';
         loadEmpDrawings();
-    });
+        });
 
-    refreshEmpDrawingsBtn.addEventListener('click', loadEmpDrawings);
+        refreshEmpDrawingsBtn.addEventListener('click', loadEmpDrawings);
 
-    async function loadEmpDrawings() {
+        async function loadEmpDrawingsBadge() {
+            if (!window.supabaseClient) return;
+            try {
+                const { data } = await supabaseClient.from('cats').select('id, status').eq('domain', 'phaistos-fai');
+                if (data) {
+                    const n = data.filter(d => d.status === 'pending').length;
+                    if (n > 0) { empDrawingsBadge.textContent = n; empDrawingsBadge.style.display = 'inline-block'; }
+                    else { empDrawingsBadge.style.display = 'none'; }
+                }
+            } catch(e) {}
+        }
+
+        async function loadEmpDrawings() {
         if (!window.supabaseClient) return;
         empDrawingsStatus.style.display = 'block';
         empDrawingsStatus.textContent = '⏳ Φόρτωση ζωγραφιών...';
@@ -374,17 +388,17 @@
         } catch(err) {
             empDrawingsStatus.textContent = 'Σφάλμα φόρτωσης: ' + err.message;
         }
-    }
+        }
 
-    window.empApproveDrawing = async function(id) {
+        window.empApproveDrawing = async function(id) {
         if (!confirm('Έγκριση της ζωγραφιάς για δημοσίευση στο site;')) return;
         try {
             await supabaseClient.from('cats').update({ status: 'approved' }).eq('id', id);
             loadEmpDrawings();
         } catch(e) { alert(e.message); }
-    };
+        };
 
-    window.empTogglePackaging = async function(id, setPackaging) {
+        window.empTogglePackaging = async function(id, setPackaging) {
         try {
             const { data } = await supabaseClient.from('cats').select('bio').eq('id', id).single();
             let currentBio = data ? (data.bio || '') : '';
@@ -397,17 +411,17 @@
             }
             loadEmpDrawings();
         } catch(e) { alert(e.message); }
-    };
+        };
 
-    window.empDeleteDrawing = async function(id) {
+        window.empDeleteDrawing = async function(id) {
         if (!confirm('Οριστική διαγραφή αυτής της ζωγραφιάς;')) return;
         try {
             await supabaseClient.from('cats').delete().eq('id', id);
             loadEmpDrawings();
         } catch(e) { alert(e.message); }
-    };
+        };
 
-    }
+        }
 
     // ── Logout ────────────────────────────────────────────────────────
     logoutBtn.addEventListener('click', () => {

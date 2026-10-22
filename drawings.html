@@ -436,10 +436,8 @@
         function renderDrawings() {
             const likedIds = getLikedIds();
 
-            let filtered = allDrawings.filter(d => {
-                // Show approved drawings, plus any local pending drawings created on this device
-                return d.status === 'approved' || d.status === 'pending' || d.isSample;
-            });
+            // PUBLIC view: only show approved drawings (pending = hidden until admin approves)
+            let filtered = allDrawings.filter(d => d.status === 'approved' || d.isSample);
 
             if (currentFilter === 'corporate') {
                 filtered = filtered.filter(d => d.isSample);
@@ -753,15 +751,7 @@
                 }
             }
 
-            // Save to local cache so uploader immediately sees their drawing with pending badge
-            const cached = getCachedDrawings();
-            cached.unshift(newDrawing);
-            setCachedDrawings(cached);
-
-            allDrawings.unshift(newDrawing);
-            renderDrawings();
-
-            // Reset form
+            // Save to Supabase only — do NOT add to local list or show publicly (awaits admin approval)
             drawingUploadForm.reset();
             resetFileSelection();
             submitDrawingBtn.disabled = false;
