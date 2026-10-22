@@ -213,6 +213,21 @@
             </div>
 
         </section>
+
+        <!-- Drawings Approval Section (hidden by default) -->
+        <section id="drawingsApprovalSection" style="display:none;max-width:860px;margin:0 auto;padding:32px 20px 60px;">
+            <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:24px;">
+                <div>
+                    <h1 class="section-title">🎨 Έγκριση Ζωγραφιών</h1>
+                    <p class="section-subtitle">Διαχείριση ζωγραφιών από επισκέπτες 🖌️</p>
+                </div>
+                <button id="refreshEmpDrawingsBtn" class="btn btn-outline" style="padding:10px 18px;font-size:0.9rem;">
+                    🔄 Ανανέωση
+                </button>
+            </div>
+            <div id="empDrawingsStatus" style="text-align:center;padding:30px;color:var(--text-muted);font-weight:700;display:none;"></div>
+            <div id="empDrawingsList" style="display:flex;flex-direction:column;gap:16px;"></div>
+        </section>
     </div>
 
     <!-- Footer -->
